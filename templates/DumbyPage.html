@@ -1,9 +1,11 @@
+{% extends 'layout.html' %}
+
 <html>
 <head>
     <title> Auto Shop Website </title>
 </head>
 <body>
-    <form>
+    <form action= "{{ url_for('login') }}" method="post">
         First Name:<br>
         <input type="text" name="firstname">
         <br>
@@ -11,6 +13,7 @@
         <input type="text" name="lastname">
         <br><br>
         <input type="submit" value="Submit">
+        {{ form.csrf_token }}
     </form>
 </body>
 </html>
