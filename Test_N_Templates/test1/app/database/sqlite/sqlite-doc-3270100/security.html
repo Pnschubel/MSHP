@@ -1,0 +1,168 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html><head>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<link href="sqlite.css" rel="stylesheet">
+<title>Defense Against Dark Arts</title>
+<!-- path= -->
+</head>
+<body>
+<div class=nosearch>
+<a href="index.html">
+<img class="logo" src="images/sqlite370_banner.gif" alt="SQLite" border="0">
+</a>
+<div><!-- IE hack to prevent disappearing logo --></div>
+<div class="tagline desktoponly">
+Small. Fast. Reliable.<br>Choose any three.
+</div>
+<div class="menu mainmenu">
+<ul>
+<li><a href="index.html">Home</a>
+<li class='mobileonly'><a href="javascript:void(0)" onclick='toggle_div("submenu")'>Menu</a>
+<li class='wideonly'><a href='about.html'>About</a>
+<li class='desktoponly'><a href="docs.html">Documentation</a>
+<li class='desktoponly'><a href="download.html">Download</a>
+<li class='wideonly'><a href='copyright.html'>License</a>
+<li class='desktoponly'><a href="support.html">Support</a>
+<li class='desktoponly'><a href="prosupport.html">Purchase</a>
+<li class='search' id='search_menubutton'>
+<a href="javascript:void(0)" onclick='toggle_search()'>Search</a>
+</ul>
+</div>
+<div class="menu submenu" id="submenu">
+<ul>
+<li><a href='about.html'>About</a>
+<li><a href='docs.html'>Documentation</a>
+<li><a href='download.html'>Download</a>
+<li><a href='support.html'>Support</a>
+<li><a href='prosupport.html'>Purchase</a>
+</ul>
+</div>
+<div class="searchmenu" id="searchmenu">
+<form method="GET" action="search">
+<select name="s" id="searchtype">
+<option value="d">Search Documentation</option>
+<option value="c">Search Changelog</option>
+</select>
+<input type="text" name="q" id="searchbox" value="">
+<input type="submit" value="Go">
+</form>
+</div>
+</div>
+<script>
+function toggle_div(nm) {
+var w = document.getElementById(nm);
+if( w.style.display=="block" ){
+w.style.display = "none";
+}else{
+w.style.display = "block";
+}
+}
+function toggle_search() {
+var w = document.getElementById("searchmenu");
+if( w.style.display=="block" ){
+w.style.display = "none";
+} else {
+w.style.display = "block";
+setTimeout(function(){
+document.getElementById("searchbox").focus()
+}, 30);
+}
+}
+function div_off(nm){document.getElementById(nm).style.display="none";}
+window.onbeforeunload = function(e){div_off("submenu");}
+/* Disable the Search feature if we are not operating from CGI, since */
+/* Search is accomplished using CGI and will not work without it. */
+if( !location.origin.match || !location.origin.match(/http/) ){
+document.getElementById("search_menubutton").style.display = "none";
+}
+/* Used by the Hide/Show button beside syntax diagrams, to toggle the */
+function hideorshow(btn,obj){
+var x = document.getElementById(obj);
+var b = document.getElementById(btn);
+if( x.style.display!='none' ){
+x.style.display = 'none';
+b.innerHTML='show';
+}else{
+x.style.display = '';
+b.innerHTML='hide';
+}
+return false;
+}
+</script>
+</div>
+<div class=fancy>
+<div class=nosearch>
+<div class="fancy_title">
+Defense Against Dark Arts
+</div>
+</div>
+
+
+
+
+<h1 id="sqlite_always_validates_its_inputs"><span>1. </span>SQLite Always Validates Its Inputs</h1>
+
+<p>
+SQLite should never crash, overflow a buffer, leak memory,
+or exhibit any other harmful behavior, even when presented with
+maliciously malformed SQL inputs or database files.  SQLite should
+always detect erroneous inputs and raise an error, not crash or
+corrupt memory.
+Any malfunction caused by an SQL input or database file
+is considered a serious bug and will be promptly addressed when
+brought to the attention of the SQLite developers.  SQLite is
+extensively fuzz-tested to help ensure that it is resistant
+to these kinds of errors.
+
+</p><p>
+Nevertheless, bugs happen.
+If you are writing an application that sends untrusted SQL inputs
+or database files to SQLite, there are additional steps you can take
+to help reduce the attack surface and
+prevent zero-day exploits caused by undetected bugs.
+
+</p><h2 id="untrusted_sql_inputs"><span>1.1. </span>Untrusted SQL Inputs</h2>
+<p>
+Applications that accept untrusted SQL inputs should take the following
+precautions:
+
+</p><ol>
+<li><p>
+Set the <a href="c3ref/c_dbconfig_defensive.html#sqlitedbconfigdefensive">SQLITE_DBCONFIG_DEFENSIVE</a> flag.
+This prevents ordinary SQL statements from corrupting the database
+file.
+
+</p></li><li><p>
+Consider using the <a href="c3ref/set_authorizer.html">sqlite3_set_authorizer()</a> interface to limit
+the scope of SQL that will be processed.
+</p></li></ol>
+
+<h2 id="untrusted_sqlite_database_files"><span>1.2. </span>Untrusted SQLite Database Files</h2>
+
+<p>Applications that accept untrusted database files should do the following:
+
+</p><ol>
+<li value="3"><p>
+Run <a href="pragma.html#pragma_integrity_check">PRAGMA integrity_check</a> or <a href="pragma.html#pragma_quick_check">PRAGMA quick_check</a> on the database
+as the first SQL statement after opening the database files and
+prior to running any other SQL statements.  Reject and refuse to
+process any database file containing errors.
+
+</p></li><li><p>
+Enable the <a href="pragma.html#pragma_cell_size_check">PRAGMA cell_size_check=ON</a> setting.
+
+</p></li><li><p>
+Do not enable memory-mapped I/O.
+In other words, make sure that <a href="pragma.html#pragma_mmap_size">PRAGMA mmap_size=0</a>.
+</p></li></ol>
+
+<h1 id="summary"><span>2. </span>Summary</h1>
+
+<p>
+The precautions above are not required in order to use SQLite safely
+with potentially hostile inputs.
+However, they do provide an extra layer of defense against zero-day
+exploits and are encouraged for applications that pass data from
+untrusted sources into SQLite.
+</p>
