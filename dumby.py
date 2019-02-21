@@ -1,13 +1,11 @@
 from flask import Flask, render_template, redirect, url_for
 
-from . import app
-from .forms import EmailPasswordForm 
 
 app = Flask(__name__)
 
 @app.route('/')
 def index():
-    return render_template('DumbyPage.html')
+    return render_template('login.html')
 
 def login():
     form = LoginForm()
