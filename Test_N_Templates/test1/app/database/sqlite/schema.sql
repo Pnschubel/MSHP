@@ -8,23 +8,25 @@
     --You can't nest tables, but you can use parent-child tables where one element of child is id of parent.
     --Kids can find parents, not vice versa, so we'll have to work backwards.
     
-CREATE TABLE customer(
-    id INTEGER PRIMARY KEY,
-    customer-name TEXT NOT NULL,
-    customer-email TEXT NOT NULL
+CREATE TABLE customers(
+    customerId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    customerName TEXT NOT NULL,
+    customerEmail TEXT NOT NULL
     );
 
-CREATE TABLE vehicle(
-    id INTEGER PRIMARY KEY,
-    make TEXT NOT NULL,
-    model TEXT NOT NULL,
-    vin INTEGER,
-    customer-id INTEGER NOT NULL
+CREATE TABLE vehicles(
+    vehicleId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    make TEXT,
+    model TEXT,
+    vin TEXT CHECK(vin is null or length(vin) == 14),
+    customerId INT NOT NULL,
+    FOREIGN KEY(customerId) REFERENCES customers(customerId)
     );
 
 CREATE TABLE repairs(
-    id INTEGER PRIMARY KEY,
-    repair-type TEXT NOT NULL,
-    accepted BOOLEAN NOT NULL,
-    vehicle-id INTEGER
+    repairId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    repairType TEXT NOT NULL,
+    accepted BOOLEAN,
+    vehicleId INT NOT NULL,
+    FOREIGN KEY(vehicleId) REFERENCES vehicles(vehicleId)
     );
