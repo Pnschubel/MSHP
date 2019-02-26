@@ -1,0 +1,6 @@
+/idea/
+/instance/
+/venv/
+*.xml
+*.iml
+/__pycache__/
