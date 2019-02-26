@@ -2,4 +2,3 @@
 /venv/
 *.xml
 *.iml
-/app/__pycache__/
