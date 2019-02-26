@@ -3,4 +3,4 @@
 /venv/
 *.xml
 *.iml
-/__pycache__/
+/app/__pycache__/
