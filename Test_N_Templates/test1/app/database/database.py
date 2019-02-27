@@ -1,17 +1,17 @@
 #Payton Schubel
 #Auto Tutorial Databasing
 #February 8th, 2019
-#A file in order to manage the database (retreiving, closing, etc.)
 
 #import sqlite3 so we can use it
+from flask import Flask
+myApp = Flask(__name__)
 import sqlite3
 
 #the g stands for global; it's the same as an app context
 #basically, it's a recepticle for data we want to store.
 from flask import g
-
 #the path where the database is stored
-DATABASE='test1/app/database/car-database.db'
+DATABASE='CarDB.db'
 
 #how to open the database in the first place
 def get_db():
@@ -42,16 +42,43 @@ def init_db():
         db.commit()
         
 #Registers command with the flask script
-@app.cli.command('initdb')
+@myApp.cli.command('initdb')
 def initdb_command():
     #Initializes the database
     init_db()
     #for troubleshooting
     print ('Initialized the Database')
+    
+#Pretty sure this runs the module when in the right space.
+if __name__ == '__main__':
+    init_db()
+    app.run()
+    
+#THE GOD FUNCTION
+#Basically, can 1) Display 2) Add To 3) Remove from database
+def query_db(query, args=(), one=False):
+
+    #Two things:
+    #1) Call get_db() to get conncetion to DB
+    #2) Execute the query within given arguments
+    #Fancry wrapper for regular get_db().execute()
+    cursor = get_db().execute(query, args)
+    
+    #Returns 'all remaining' results from query. Typically have to move
+    #One by by one with cursor, but fetchall loads everything into a list
+    #and returns it. 
+    queryList = cursor.fetchall()
+    
+    #closes database connection
+    cursor.close()
+    
+    #If 'One' is true, will return top value of list. (For only one result.)
+    #If 'one' is false, it'll return the entire list.
+    return (queryList[0] if queryList else none) if one else queryList
 
 
 #So, this will run (always) to close the database when done.
-@app.teardown_appcontext
+@myApp.teardown_appcontext
 #So we're gonna close it now
 def close_connection(exception):
     #sees if the database is open right now or not.
@@ -61,7 +88,8 @@ def close_connection(exception):
         #how to close the database
         db.close()
         
-        
+
+
 #EXTRA ASSORTED NOTES
 #to connect on demand (if testing, open by hand first)
         #with app.app_context() //allows you to use get_db()
