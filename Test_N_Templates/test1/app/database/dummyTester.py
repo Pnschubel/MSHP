@@ -3,12 +3,12 @@
 
 from flask import Flask
 from database import query_db
+from database import close_connection
 
 app = Flask(__name__)
 with app.app_context():
 
     #Data with which to populate our dummy database
-    ids = [0,1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]
     customerNames = ["Hana","Matias","Orrin","Payton","Sean"]
     customerEmail =["hana@hasan.com","matias@bonta.com","orrin@lutes.com","payton@schubel.com","sean@kuderna.com"]
 
@@ -18,19 +18,36 @@ with app.app_context():
     types = ["oil change","oil change","tire rotation", "ATF Change"]
 
     #Something to insert data into the customers table
-    count = 0
-    for customer in customerNames:
+    for count, value in enumerate (customerNames):
         query_db("INSERT INTO customers (customerId, customerName, customerEmail) VALUES(?,?,?)",
-                 (ids[count], customer, customerEmail[count]))
-        count += 1
-        
+                 (count, customerNames[count], customerEmail[count]))        
     
+
     #Something to insert data into the vehicles table
-    #resetting count
-    count = 0
-    for make in makes:
+    for count, value in enumerate (makes):
         owner = query_db("SELECT * FROM customers WHERE customerId = ?", (count,), True)
-        query_db("INSERT INTO vehicles (vehicleId, make, model, customerId) VALUES(?,?,?,?)"
-                 ids[count], make, models[count], owner["customerId"])
-        count += 1
+        query_db("INSERT INTO vehicles (vehicleId, make, model, customerId) VALUES(?,?,?,?)",
+                 (count, makes[count], models[count], owner[0]))
+
+    #Something to insert into the vehicles table
+    #(I'm going to give some cars two repairs and some cars one, hence the 7)
+    i = 0
+    while i <= 7:
+        car = query_db("SELECT * FROM customers WHERE customerId = ?", (i % 5,), True)
+        query_db("INSERT INTO repairs (repairId, repairType, vehicleId) VALUES(?,?,?)",
+                 (i, types[i % 4], car[0]))
+        i += 1
+
         
+        customers = query_db("SELECT * FROM customers ORDER BY customerId DESC")
+        print("\nCUSTOMERS:\n")
+        for customer in customers:
+            print(customer)
+        print("\n\nVEHICLES:\n")
+        vehicles = query_db("SELECT * FROM vehicles ORDER BY vehicleId DESC")
+        for vehicle in vehicles:
+            print(vehicle)
+        print ("\n\nREPAIRS:\n")
+        repairs = query_db("SELECT * FROM repairs ORDER BY repairId DESC")
+        for repair in repairs:
+            print (repair)

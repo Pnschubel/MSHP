@@ -31,7 +31,7 @@ def get_db():
 #THIS MAY OR MAY NOT GO HERE
 #This is to build the database from the schema file
 def init_db():
-    with app.app_context():
+    with myApp.app_context():
         #Sets the database equal to the value of get_db()
         db.get_db()
         #Builds db off of the schema sql file (opened for read)
@@ -74,7 +74,7 @@ def query_db(query, args=(), one=False):
     
     #If 'One' is true, will return top value of list. (For only one result.)
     #If 'one' is false, it'll return the entire list.
-    return (queryList[0] if queryList else none) if one else queryList
+    return (queryList[0] if queryList else()) if one else queryList
 
 
 #So, this will run (always) to close the database when done.
