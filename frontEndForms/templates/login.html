@@ -9,8 +9,7 @@
         <p>Name: <input type = "text" name = "Name" /> <p>
         <p>Email: <input type = "text" name = "Email" /> </p>
         <p>Phone Number: <input type = "text" name = "phone" /> </p>
-        //Vehicle information field 
-        <fieldset>
+	<fieldset>
             <legend>Vehicle</legend>
             <p>Make: <input type = "text" name = "vehicleMake" /></p>
             <p>Model: <input type = "text" name = "vehicleModel" /> </p>
@@ -18,16 +17,15 @@
             <p>OR</p>
             <p>Vin Number: <input type = "text" name = "vinNum" /> </p>
         </fieldset>
-        //Repair information field 
-        <fieldset>
+	<fieldset>
             <legend>Repair</legend>
             <select>
-                <option>value="oilChange">Oil Change</option>
-                <option>value="brakes"Brake Replacement</option>
-                <option>value="other">Other</option>
+		    <option value="oilChange">Oil Change</option>
+		    <option value="brakes"> Brake Replacement</option>
+		    <option value="other"> Other</option>
             </select>
             <p>Describe Your Repair</p>
-            <textarea> name = "repairDescription" rows="10" cols="30"
+	    <textarea name = "repairDescription" rows="10" cols="30">
             </textarea>
         </fieldset>
         <p><input type = "submit" value = "submit"></p>

@@ -2,7 +2,6 @@ from flask import Flask, render_template, request
 
 app = Flask(__name__)
 
-##cmment
 @app.route('/')
 def form():
     return render_template('login.html')
