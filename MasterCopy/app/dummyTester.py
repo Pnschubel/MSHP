@@ -4,10 +4,9 @@
 from flask import Flask, current_app, g
 from database import query_db, close_connection
 
-#THIS WORKS TEMPORARILY BUT FAILS IN LONG RUN WHEN I CAN'T GET AT DATA
-app = Flask(__name__)
+#myApp.config.from_object(__name__)
 
-with app.app_context():
+with myApp.app_context():
     #Data with which to populate our dummy database
     customerNames = ["Hana","Matias","Orrin","Payton","Sean"]
     customerEmail =["hana@hasan.com","matias@bonta.com","orrin@lutes.com","payton@schubel.com","sean@kuderna.com"]

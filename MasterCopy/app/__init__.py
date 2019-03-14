@@ -10,7 +10,7 @@ def create_app(test_config=None):
     
     #SECRET_KEY is to keep nasty hackers from doing dum stuff.
     #DATABASE is path of our database
-    myApp.config.from_mapping(SECRET_KEY="dev", DATABASE = os.path.join(myApp.instance_path, "app.sqlite"))
+    myApp.config.from_mapping(SECRET_KEY="dev", DATABASE = os.path.join(myApp.instance_path, "CarDB.sqlite"))
 
 
     #I"M NOT DONE COMMENTING THIS I'MMA FIX IT LATER
@@ -28,17 +28,12 @@ def create_app(test_config=None):
     from . import database
     from . import dummyTester
     
-    #myApp.register_blueprint(index.bp)
+    myApp.register_blueprint(index.bp)
     
     database.init_app(myApp)
-    return myAppimport os
-from flask import Flask
-myApp = Flask(__name__)
+    
+    return myApp
 
-#Don't forget to register your files with the app (this is why we needed workarounds)
-from app import routes
-from app import database
-from app import CarDB
 
 #Justas's version of this file is signficantly more complicated
 #and probably better so if a) we're getting a lot of errors we can't
