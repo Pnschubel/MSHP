@@ -10,8 +10,11 @@ def form():
 @app.route('/result', methods = ['POST','GET'])
 def result():
     if request.method == 'POST':
-        result = request.form ##gets form from form()??
-	## pushData(result)
+        result = request.form.to_dict() ##gets form from form()??
+        for field,userinput in result: 
+            print(field, userinput)
+        ##print (result)
+        ## pushData(result)
         return render_template("result.html", result = result)
 
 
