@@ -28,7 +28,6 @@ def get_db():
         )
     #Now we make everything into a dictionary for ease
     g.db.row_ractory = make_dicts
-    
     return g.db
 
 #THE GOD FUNCTION
