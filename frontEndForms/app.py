@@ -11,7 +11,7 @@ def form():
 def result():
     if request.method == 'POST':
         result = request.form.to_dict() ##gets form from form()??
-        for field,userinput in result: 
+        for field,userinput in result.items(): 
             print(field, userinput)
         ##print (result)
         ## pushData(result)
