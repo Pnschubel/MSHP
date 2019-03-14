@@ -6,20 +6,20 @@
 </head>
 <body>
     <form action = "http://localhost:5000/result" method = "POST" >
-        <p>Name: <input type = "text" name = "Name" /> <p>
-        <p>Email: <input type = "text" name = "Email" /> </p>
-        <p>Phone Number: <input type = "text" name = "phone" /> </p>
+        <p>Name: <input type = "text" name = "customerName" /> <p>
+        <p>Email: <input type = "text" name = "customEmail" /> </p>
+        <p>Phone Number: <input type = "text" name = "customerPhoneNum" /> </p>
 	<fieldset>
             <legend>Vehicle</legend>
-            <p>Make: <input type = "text" name = "vehicleMake" /></p>
-            <p>Model: <input type = "text" name = "vehicleModel" /> </p>
-            <p>Year: <input type = "text" name = "vehicleYear" /> </p>
+            <p>Make: <input type = "text" name = "make" /></p>
+            <p>Model: <input type = "text" name = "model" /> </p>
+            <p>Year: <input type = "text" name = "year" /> </p>
             <p>OR</p>
-            <p>Vin Number: <input type = "text" name = "vinNum" /> </p>
+            <p>Vin Number: <input type = "text" name = "vin" /> </p>
         </fieldset>
 	<fieldset>
             <legend>Repair</legend>
-            <select name  ="repairTypes">
+            <select name  ="repairType">
 		    <option> </option>
 		    <option value = "oilchange">Oil Change</option>
 		    <option value = "brakes"> Brake Replacement</option>

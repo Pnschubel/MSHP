@@ -1,3 +1,4 @@
+
 from flask import Flask, render_template, request
 
 app = Flask(__name__)
@@ -10,6 +11,7 @@ def form():
 def result():
     if request.method == 'POST':
         result = request.form ##gets form from form()??
+	## pushData(result)
         return render_template("result.html", result = result)
 
 
