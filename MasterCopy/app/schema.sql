@@ -18,12 +18,14 @@ CREATE TABLE customers(
     customerId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     customerName TEXT NOT NULL,
     customerEmail TEXT NOT NULL
+    customerPhoneNum INT 
     );
 
 CREATE TABLE vehicles(
     vehicleId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     make TEXT,
     model TEXT,
+    year INT,
     vin TEXT CHECK(vin is null or length(vin) == 14),
     customerId INT NOT NULL,
     FOREIGN KEY(customerId) REFERENCES customers(customerId)
@@ -32,6 +34,7 @@ CREATE TABLE vehicles(
 CREATE TABLE repairs(
     repairId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     repairType TEXT NOT NULL,
+    repairDescription TEXT
     accepted BOOLEAN,
     vehicleId INT NOT NULL,
     FOREIGN KEY(vehicleId) REFERENCES vehicles(vehicleId)
