@@ -26,9 +26,9 @@ def create_app(test_config=None):
     
     
     from . import database
-    from . import dummyTester
+    #from . import dummyTester
     
-    myApp.register_blueprint(index.bp)
+    #myApp.register_blueprint(index.bp)
     
     database.init_app(myApp)
     

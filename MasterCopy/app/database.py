@@ -52,7 +52,7 @@ def query_db(query, args=(), one=False):
     #If 'one' is false, it'll return the entire list.
     return (queryList[0] if queryList else()) if one else queryList
 
-def close_connection(exception=None):
+def close_db(exception=None):
     #Checks if db exists in g and grabs it if so.
     db = g.pop("db", None)
     
@@ -70,7 +70,7 @@ def init_db():
         db.executescript(f.read().decode("utf8"))
         
 def init_app(myApp):
-    #When called init __init__, close_db gets teardown_appcontext
+    #When called init __init__, close_connection gets teardown_appcontext
     #decorater, so "initdb" becomes usable command to invoke
     #init_db_command()
     

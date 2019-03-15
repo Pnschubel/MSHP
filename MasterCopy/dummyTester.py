@@ -1,8 +1,13 @@
 #Payton Schubel and Sean Kuderna
 #Way to test the database & functionality.
 
+from app import create_app
+app = create_app()
 from flask import Flask, current_app, g
-from database import query_db, close_connection
+from app import database
+from app import myApp
+
+from database import close_connection, query_db
 
 #myApp.config.from_object(__name__)
 
@@ -50,3 +55,4 @@ with myApp.app_context():
         repairs = query_db("SELECT * FROM repairs ORDER BY repairId DESC")
         for repair in repairs:
             print (repair)
+ 

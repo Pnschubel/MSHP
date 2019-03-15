@@ -1,7 +1,5 @@
-from flask import Flask, render_template, request
+from app import myApp
 
-myApp = Flask(__name__)
-
-if __name__ == "__main__"
-    myApp = create_app()
-    myApp.run(debug=True)
+if __name__ = "__main__":
+    app = create_app()
+    app.run(debug = True)
