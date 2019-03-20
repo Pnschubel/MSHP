@@ -22,7 +22,10 @@ def testResult():
         for field, userinput in result.items():
             ##checks email
             if field == 'email':
-                if emailchecker(userInput) == 0:
+                if hasData(userInput) == 0 || emailChecker(userInput) == 0 || vinNumber(userInput, year): == 0:
+                       return render_template('/testResult' methods = ['POST', "Get"])
+                else:
+                    return render_template("result.html", result = result)
 
 
 
