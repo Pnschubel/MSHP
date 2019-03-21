@@ -1,4 +1,5 @@
 #Payton Schubel and Sean Kuderna
+#Special thanks to Justas Stankavicius
 #Way to test the database & functionality.
 
 from app.database import query_db, close_db

@@ -13,10 +13,12 @@ def create_app(test_config=None):
     myApp.config.from_mapping(SECRET_KEY="dev", DATABASE = os.path.join(myApp.instance_path, "CarDB.sqlite"))
 
 
-    #I"M NOT DONE COMMENTING THIS I'MMA FIX IT LATER
     if test_config is None:
+        #If there is a configured instance, load it. config.py can store values
+        #you don't want visible, like a real secret key.
         myApp.config.from_pyfile("config.py",silent=False)
     else:
+        #otherwise, test configuration
         myApp.config.from_mapping(test_config)
         
     try:
@@ -24,11 +26,13 @@ def create_app(test_config=None):
     except OSError:
         pass
     
-    
+    #import your blueprints here
     from . import database
     #from . import dummyTester
     
-    #myApp.register_blueprint(index.bp)
+    #register your blueprints here.
+    #Can use flask tutorial
+    #Ex: myApp.register_blueprint(index.bp)
     
     database.init_app(myApp)
     
