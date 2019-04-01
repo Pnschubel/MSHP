@@ -132,7 +132,7 @@ def getRepairDescription(email):
     return(repair_refPoint.repairDescription)   
     #Return the repair description associated with vehicle ID number
 
-def getStatus(email):
+def getAccepted(email):
                         #This may have to be changed to .query_db
     refPoint = customers.query.filter_by(customerEmail = email)
     #refPoint = customer email
@@ -164,47 +164,97 @@ def getStatus(email):
 
 #Set Customer Info
 #-----------------
-def setcustomerName(name):
+def setCustomerName(name):
     query_db("UPDATE customers SET customerName = ?", name)
     return("customerName has been updated to " + name)
 
-def setcustomerEmail(email):
+def setCustomerEmail(email):
     query_db("UPDATE customers SET customerEmail = ?", name)
     return("customerEmail has been updated to " + email)
 
-def setcustomerPhoneNum(phoneNum):
+def setCustomerPhoneNum(phoneNum):
     query_db("UPDATE customers SET customerPhoneNum = ?", phoneNum)
     return("customerPhoneNum has been updated to " + phoneNum)
 
 
 #Set Vehicle Info
 #----------------
-def setmake(make):
+def setMake(make):
     query_db("UPDATE vehicles SET make = ?", make)
     return("make has been updated to " + make)
 
-def setmodel(model):
+def setModel(model):
     query_db("UPDATE vehicles SET model = ?", model)
     return("model has been updated to " + model)
 
-def setyear(year):
+def setYear(year):
     query_db("UPDATE vehicles SET year = ?", year)
     return("year has been updated to " + year)
 
 
 #Set Repair Info
 #---------------
-def setrepairType(repairType):
+def setRepairType(repairType):
     query_db("UPDATE repairs SET repairType = ?", repairType)
     return("repair type has been updated to " + repairType)
 
-def setrepairDescription(repairDescription):
+def setRepairDescription(repairDescription):
     query_db("UPDATE repairs SET repairDescription = ?", repairDescription)
     return("repair description has been updated to " + repairDescription)
 
-def setaccepted(accepted):
+def setAccepted(accepted):
     query_db("UPDATE repairs SET accepted = ?", accepted)
     return("status has been updated to " + accepted)
+
+
+#BIG RED BUTTON FUNCTIONS
+#-----------------------------------------------------------------------------------------------------------
+
+
+#Whipe Customers
+def BIG_RED_BUTTON_CUSTOMERS()
+    comfirmation = input("You are about to whipe all customers from user database... are you sure> (y/n)")
+    if confirmation.lower() = "y":
+        query_db("DELETE FROM customers;")
+    else:
+        return ("Data whipe canceled")
+
+#Whipe vehicles
+def BIG_RED_BUTTON_VEHICLES()
+    comfirmation = input("You are about to whipe all vehicles from database... are you sure> (y/n)")
+    if confirmation.lower() = "y":
+        query_db("DELETE FROM vehicles;")
+    else:
+        return ("Data whipe canceled")
+
+#Whipe repairs
+def BIG_RED_BUTTON_REPAIRS()
+    comfirmation = input("You are about to whipe all repairs from database... are you sure> (y/n)")
+    if confirmation.lower() = "y":
+        query_db("DELETE FROM reapirs;")
+    else:
+        return ("Data whipe canceled")
+
+#Remove a row
+#-----------------------------------------------------------------------------------------------------------
+
+
+#Remove repair
+def RemoveRepair(email):
+    ref = getRepairDescription(email)
+    query_db("DELETE FROM repairs WHERE repairID = ref.repairID")
+
+#Remove vehicle
+def RemoveVehicle(email):
+    ref = getMake(email)
+    query_db("DELETE FROM vehicles WHERE vehicleID = ref.vehicleID")
+
+#Remove customer
+def RemoveCustomer(email):
+    query_db("DELETE FROM customers WHERE customerID = email.customerID")
+
+
+
 
 
 
