@@ -18,14 +18,14 @@ CREATE TABLE customers(
     customerId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     customerName TEXT NOT NULL,
     customerEmail TEXT NOT NULL
-    customerPhoneNum INT 
+    customerPhoneNum TEXT 
     );
 
 CREATE TABLE vehicles(
     vehicleId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     make TEXT,
     model TEXT,
-    year INT,
+    year TEXT,
     vin TEXT CHECK(vin is null or length(vin) == 14),
     customerId INT NOT NULL,
     FOREIGN KEY(customerId) REFERENCES customers(customerId)

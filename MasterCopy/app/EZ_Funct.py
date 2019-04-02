@@ -8,151 +8,85 @@ from flask import current_app, g
 #GETTERS
 #---------------------------------------------------------------
 
+def getAssociatedVehicle(repID):
+
+    refPoint = repairs.query.filter_by(repairId = repID)
+
+    return(refPoint.vehicleId)
+
+def getAssociatedCustomer(vehID):
+    
+    refPoint = vehicles.query.filter_by(vehicleId = vehID)
+
+    return(refPoint.customerId)
+
 
 #Get Customer Info
 #-----------------
-def getCustomerName(email):
-                        #This may have to be changed to .query_db
-    refPoint = customers.query.filter_by(customerEmail = email)
-    #refPoint = customer email
+def getCustomerName(custID):
 
+    refPoint = customers.query.filter_by(customerId = custID)
+   
     return (refPoint.customerName)
-    #Return the name associated with customer email
+    
+def getCustomerEmail(custID):
 
-def getCustomerEmail(name):
-                        #This may have to be changed to .query_db
-    refPoint = customers.query.filter_by(customerName = name)
-    #refPoint = customer name
-
+    refPoint = customers.query.filter_by(customerId = custID)
+   
     return (refPoint.customerEmail)
-    #Retrun the email associated with the customer name
+    
+def getCustomerPhone(custID):
 
-def getCustomerPhone(email):
-                        #This may have to be changed to .query_db
-    refPoint = customers.query.filter_by(customerEmail = email)
-    #refPoint = customer email
+    refPoint = customers.query.filter_by(customerId = custID)
 
     return (refPoint.customerPhoneNum)
-    #Retrun the phone number associated with the customer name
-
+    
 
 
 
 #Get Car Info
 #-------------
-def getMake(email):
-                        #This may have to be changed to .query_db
-    refPoint = customers.query.filter_by(customerEmail = email)
-    #refPoint = customer email
+def getVehicleMake(vehID):
 
-    transferID = refPoint.customerID
-   #transferID = customer ID number
+    refPoint = vehicles.query.filter_by(vehicleId = vehID)
 
-                        #This may have to be changed to .query_db
-    vehicle_refPoint = vehicles.query.filter_by(transferID)
-    #vehicle_refPoint = customer ID number attached to vehicles table
+    return(refPoint.make)
+   
+def getVehicleModel(vehID):
 
-    return(vehicle_refPoint.make)
-    #Return the make associated with customerID number
+    refPoint = vehicles.query.filter_by(vehicleId = vehID)
+   
+    return(refPoint.model)
+    
+def getVehicleYear(vehID):
 
-def getModle(email):
-                        #This may have to be changed to .query_db
-    refPoint = customers.query.filter_by(customerEmail = email)
-    #refPoint = customer email
+    refPoint = vehicles.query.filter_by(vehicleId = vehID)
 
-    transferID = refPoint.customerID
-    #transferID = customer ID number
-
-                        #This may have to be changed to .query_db
-    vehicle_refPoint = vehicles.query.filter_by(transferID)
-    #vehicle_refPoint = customer ID number attached to vehicles table
-
-    return(vehicle_refPoint.model)
-    #Return the model associated with customerID number
-
-def getYear(email):
-                        #This may have to be changed to .query_db
-    refPoint = customers.query.filter_by(customerEmail = email)
-    #refPoint = customer email
-
-    transferID = refPoint.customerID
-    #transferID = customer ID number
-
-                        #This may have to be changed to .query_db
-    vehicle_refPoint = vehicles.query.filter_by(transferID)
-    #vehicle_refPoint = customer ID number attached to vehicles table
-
-    return(vehicle_refPoint.year)
-    #Return the year associated with customerID number
-
+    return(refPoint.year)
+   
 
 
 
 #Get Repair Info
 #--------------
-def getRepairType(email):
-                        #This may have to be changed to .query_db
-    refPoint = customers.query.filter_by(customerEmail = email)
-    #refPoint = customer email
+def getRepairType(repID):
 
-    transferID = refPoint.customerID
-    #transferID = customer ID number
+    refPoint = repairs.query.filter_by(repairId = repID)
+    
+    return(refPoint.repairType)
+    
+def getRepairDescription(repID):
 
-                        #This may have to be changed to .query_db
-    vehicle_refPoint = vehicles.query.filter_by(transferID)
-    #vehicle_refPoint = customer ID number attached to vehicles table
+     refPoint = repairs.query.filter_by(repairId = repID)
 
-    transferID_Layer2 = vehicle_refPoint.vehicleID
-    #transferID_Layer2 = vehicleID number
+     return(refPoint.repairDescription)   
+    
+def getRepairAccepted(repID):
 
-    repair_refPoint = repairs.query.filter_by(transferID_Layer2)
-    #repair_refPoint = vehicle ID number attached to repairs table
+    refPoint = repairs.query.filter_by(repairId = repID)
 
-    return(repair_refPoint.repairType)
-    #Return the repair type associated with vehicle ID number
-
-def getRepairDescription(email):
-                        #This may have to be changed to .query_db
-    refPoint = customers.query.filter_by(customerEmail = email)
-    #refPoint = customer email
-
-    transferID = refPoint.customerID
-    #transferID = customer ID number
-
-                        #This may have to be changed to .query_db
-    vehicle_refPoint = vehicles.query.filter_by(transferID)
-    #vehicle_refPoint = customer ID number attached to vehicles table
-
-    transferID_Layer2 = vehicle_refPoint.vehicleID
-    #transferID_Layer2 = vehicleID number
-
-    repair_refPoint = repairs.query.filter_by(transferID_Layer2)
-    #repair_refPoint = vehicle ID number attached to repairs table
-
-    return(repair_refPoint.repairDescription)   
-    #Return the repair description associated with vehicle ID number
-
-def getAccepted(email):
-                        #This may have to be changed to .query_db
-    refPoint = customers.query.filter_by(customerEmail = email)
-    #refPoint = customer email
-
-    transferID = refPoint.customerID
-    #transferID = customer ID number
-
-                        #This may have to be changed to .query_db
-    vehicle_refPoint = vehicles.query.filter_by(transferID)
-    #vehicle_refPoint = customer ID number attached to vehicles table
-
-    transferID_Layer2 = vehicle_refPoint.vehicleID
-    #transferID_Layer2 = vehicleID number
-
-    repair_refPoint = repairs.query.filter_by(transferID_Layer2)
-    #repair_refPoint = vehicle ID number attached to repairs table
-
-    return(repair_refPoint.accepted)   
-    #Return the status associated with vehicle ID number
-
+    return(refPoint.accepted)   
+    
 
 
 #SETTERS
@@ -164,46 +98,47 @@ def getAccepted(email):
 
 #Set Customer Info
 #-----------------
-def setCustomerName(name):
-    query_db("UPDATE customers SET customerName = ?", name)
+def setCustomerName(custID, name):
+
+    query_db("UPDATE customers SET customerName = ? WHERE customerId = ?", (name, custID))
     return("customerName has been updated to " + name)
 
-def setCustomerEmail(email):
-    query_db("UPDATE customers SET customerEmail = ?", name)
+def setCustomerEmail(custID, email):
+    query_db("UPDATE customers SET customerEmail = ? WHERE customerId = ?", (email, custID))
     return("customerEmail has been updated to " + email)
 
-def setCustomerPhoneNum(phoneNum):
-    query_db("UPDATE customers SET customerPhoneNum = ?", phoneNum)
+def setCustomerPhoneNum(custID, phoneNum):
+    query_db("UPDATE customers SET customerPhoneNum = ? WHERE customerId = ?" , (phoneNum, custID))
     return("customerPhoneNum has been updated to " + phoneNum)
 
 
 #Set Vehicle Info
 #----------------
-def setMake(make):
-    query_db("UPDATE vehicles SET make = ?", make)
+def setVehicleMake(vehID, make):
+    query_db("UPDATE vehicles SET make = ? WHERE customerId = ?", (make, vehID))
     return("make has been updated to " + make)
 
-def setModel(model):
-    query_db("UPDATE vehicles SET model = ?", model)
+def setVehicleModel(vehID, model):
+    query_db("UPDATE vehicles SET model = ? WHERE customerId = ?", (model, vehID))
     return("model has been updated to " + model)
 
-def setYear(year):
-    query_db("UPDATE vehicles SET year = ?", year)
+def setVehicleYear(vehID, year):
+    query_db("UPDATE vehicles SET year = ? WHERE customerId = ?", (year, vehID))
     return("year has been updated to " + year)
 
 
 #Set Repair Info
 #---------------
-def setRepairType(repairType):
-    query_db("UPDATE repairs SET repairType = ?", repairType)
+def setRepairType(repID, repairType):
+    query_db("UPDATE repairs SET repairType = ? WHERE repairId = ?", (repairType, repID))
     return("repair type has been updated to " + repairType)
 
-def setRepairDescription(repairDescription):
-    query_db("UPDATE repairs SET repairDescription = ?", repairDescription)
+def setRepairDescription(repID, repairDescription):
+    query_db("UPDATE repairs SET repairDescription = ? WHERE repairId = ?", (repairDescription, repID))
     return("repair description has been updated to " + repairDescription)
 
-def setAccepted(accepted):
-    query_db("UPDATE repairs SET accepted = ?", accepted)
+def setRepairAccepted(repID, accepted):
+    query_db("UPDATE repairs SET accepted = ? WHERE repairId = ?", (accepted, repID))
     return("status has been updated to " + accepted)
 
 
@@ -211,25 +146,25 @@ def setAccepted(accepted):
 #-----------------------------------------------------------------------------------------------------------
 
 
-#Whipe Customers
+#Wipe Customers
 def BIG_RED_BUTTON_CUSTOMERS()
-    comfirmation = input("You are about to whipe all customers from user database... are you sure> (y/n)")
+    comfirmation = input("You are about to wipe all customers from user database... are you sure> (y/n)")
     if confirmation.lower() = "y":
         query_db("DELETE FROM customers;")
     else:
         return ("Data whipe canceled")
 
-#Whipe vehicles
+#Wipe vehicles
 def BIG_RED_BUTTON_VEHICLES()
-    comfirmation = input("You are about to whipe all vehicles from database... are you sure> (y/n)")
+    comfirmation = input("You are about to wipe all vehicles from database... are you sure> (y/n)")
     if confirmation.lower() = "y":
         query_db("DELETE FROM vehicles;")
     else:
         return ("Data whipe canceled")
 
-#Whipe repairs
+#Wipe repairs
 def BIG_RED_BUTTON_REPAIRS()
-    comfirmation = input("You are about to whipe all repairs from database... are you sure> (y/n)")
+    comfirmation = input("You are about to wipe all repairs from database... are you sure> (y/n)")
     if confirmation.lower() = "y":
         query_db("DELETE FROM reapirs;")
     else:
@@ -240,19 +175,31 @@ def BIG_RED_BUTTON_REPAIRS()
 
 
 #Remove repair
-def RemoveRepair(email):
-    ref = getRepairDescription(email)
-    query_db("DELETE FROM repairs WHERE repairID = ref.repairID")
+def RemoveRepair(repID):
+    query_db("DELETE FROM repairs WHERE repairId = ?", repID)
 
 #Remove vehicle
-def RemoveVehicle(email):
-    ref = getMake(email)
-    query_db("DELETE FROM vehicles WHERE vehicleID = ref.vehicleID")
+def RemoveVehicle(vehID):
+    query_db("DELETE FROM vehicles WHERE vehicleId = ?", vehID)
+    query_db("DELETE FROM repairs WHERE vehicleId = ?", vehID)
+    #Deletes repairs associated with vehicle
 
 #Remove customer
-def RemoveCustomer(email):
-    query_db("DELETE FROM customers WHERE customerID = email.customerID")
+def RemoveCustomer(cusID):
+    #Write while loop until refPoint does not exist if doesnt work. 
 
+    refPoint = vehicle.query.filter_by(customerId = cusID)
+    #Sets point of referance to customerId in vehicle table
+
+    transferPoint = repairs.query.filter_by(vehicleId = refPoint.vehicleId)
+    #Gets a point of transfer that accesses vehicleId in repairs table using refPoint
+
+    query_db("DELETE FROM repairs WHERE repairId = ?", transferPoint.repairId)
+    #Deletes repairs associated with deleted car using repairId gathered from transferPoint
+    query_db("DELETE FROM vehicles WHERE customerId = ?", cusID)
+    query_db("DELETE FROM customers WHERE customerId = ?", cusID)
+
+ 
 
 
 
