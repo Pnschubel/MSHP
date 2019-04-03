@@ -22,11 +22,21 @@ def testResult():
         for field, userinput in result.items():
             ##checks email
             if field == 'email':
-                if hasData(userInput) == 0 or emailChecker(userInput) == 0 or  vinNumber(userInput, year) == 0:
-                       testResult()
-                else:
-                    print (field, userinput)
-                    return render_template("result.html", result = result)
+                if hasData(userInput) == 0 or emailChecker(userInput) == 0:
+                    ##email is wrong
+            ##check vim 
+            if field == 'vinNumber':
+                if vinNumber(userInput) == 0 and hasData(userInput):
+                    ##vin number is wrong
+            if field == 'customerName' and field == 'model' and field == 'make' and field == 'repairType' and field == "repairDescription":
+                if hasData(userInput) == 0: 
+                    ##name, model, make, repairType, and decription is wrong
+            if field == 'year': 
+                if hasData(userInput) == 0 and isintance(userInput, (int)):
+                    ##year is wrong
+    else:
+        print (field, userinput)
+        return render_template("errorPage.html", result = result)
 
 if __name__ == '__main__':
     app.run(debug = True)
