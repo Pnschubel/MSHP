@@ -5,9 +5,19 @@ import database
 from flask import current_app, g
 
 
+#Create Customer, Vehicle, Repair
+#---------------------------------
+
+
+
+
+
+
 #GETTERS
 #---------------------------------------------------------------
 
+
+#Get Associated Info
 def getAssociatedVehicle(repID):
 
     refPoint = repairs.query.filter_by(repairId = repID)
@@ -22,7 +32,6 @@ def getAssociatedCustomer(vehID):
 
 
 #Get Customer Info
-#-----------------
 def getCustomerName(custID):
 
     refPoint = customers.query.filter_by(customerId = custID)
@@ -42,10 +51,7 @@ def getCustomerPhone(custID):
     return (refPoint.customerPhoneNum)
     
 
-
-
-#Get Car Info
-#-------------
+#Get Vehicle Info
 def getVehicleMake(vehID):
 
     refPoint = vehicles.query.filter_by(vehicleId = vehID)
@@ -66,9 +72,7 @@ def getVehicleYear(vehID):
    
 
 
-
 #Get Repair Info
-#--------------
 def getRepairType(repID):
 
     refPoint = repairs.query.filter_by(repairId = repID)
@@ -97,7 +101,6 @@ def getRepairAccepted(repID):
 
 
 #Set Customer Info
-#-----------------
 def setCustomerName(custID, name):
 
     query_db("UPDATE customers SET customerName = ? WHERE customerId = ?", (name, custID))
@@ -113,7 +116,6 @@ def setCustomerPhoneNum(custID, phoneNum):
 
 
 #Set Vehicle Info
-#----------------
 def setVehicleMake(vehID, make):
     query_db("UPDATE vehicles SET make = ? WHERE customerId = ?", (make, vehID))
     return("make has been updated to " + make)
@@ -128,7 +130,6 @@ def setVehicleYear(vehID, year):
 
 
 #Set Repair Info
-#---------------
 def setRepairType(repID, repairType):
     query_db("UPDATE repairs SET repairType = ? WHERE repairId = ?", (repairType, repID))
     return("repair type has been updated to " + repairType)
