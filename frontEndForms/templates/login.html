@@ -31,5 +31,8 @@
         </fieldset>
         <p><input type = "submit" value = "submit"></p>
     </form>
+    {% if error %}
+    	<p class = "error">Error: {{ error }} </p>
+    {% end if  %}
 </body>
 </html>
