@@ -22,7 +22,7 @@ header {
 .request {
   position: relative;
   height: 150px;
-  width: 75%;
+  width: 1000px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 1em;
@@ -32,11 +32,10 @@ header {
 
 .vehicle {
   position: relative;
-  width: 750px;
-  font-size: 45px;
+  width: 500px;
+  font-size: 40px;
   color: #F7FFF7;
   background: transparent;
-  cursor: pointer;
   font-family: 'Nunito Sans', sans-serif;
 }
 
@@ -46,7 +45,6 @@ header {
   font-size: 25px;
   color: #F7FFF7;
   background: transparent;
-  cursor: pointer;
   font-family: 'Nunito Sans', sans-serif;
   text-transform: uppercase;
   letter-spacing: 2px;
@@ -58,7 +56,6 @@ header {
   font-size: 25px;
   color: #F7FFF7;
   background: transparent;
-  cursor: pointer;
   font-family: 'Nunito Sans', sans-serif;
 }
 
@@ -67,7 +64,16 @@ header {
   transform: translateY(-50%);
   position: absolute;
   right: 0;
-  margin-right: 25px;
+  margin-right: 12px;
+  background: transparent;
+}
+
+.info-wrapper {
+  top: 50%;
+  transform: translateY(-50%);
+  position: absolute;
+  left: 500px;
+  margin-right: 0px;
   background: transparent;
 }
 
@@ -76,8 +82,38 @@ header {
   transform: translateY(-50%);
   position: absolute;
   left: 0;
-  margin-left: 25px;
+  margin-left: 12px;
   background: transparent;
+}
+
+.circle-button {
+  position: relative;
+  background: transparent;
+  border-color: #F7FFF7;
+  border-width: 5px;
+  border-style: solid;
+  height: 60px;
+  width: 60px;
+  border-radius: 30px;
+  text-align: center;
+}
+
+.triangle {
+  position: absolute;
+  left: 10px;
+  top: 20px;
+  background: transparent;
+  width: 0;
+  height: 0;
+  border-left: 15px solid transparent;
+  border-right: 15px solid transparent;
+  border-top: 15px solid #F7FFF7;
+  transition: 0.5s;
+}
+
+.circle-button:active .triangle {
+  transition: 0.1s;
+  transform: translateY(5px);
 }
 
 .multi-button {
@@ -119,13 +155,25 @@ header {
   text-align: center;
   padding: 5px 0;
   position: absolute;
-  z-index: 1;
+  z-index: 100;
   bottom: 125%;
   left: 50%;
   margin-left: -250px;
   opacity: 0;
   transition: 0.5s;
   transition-delay: 0.5s;
+}
+
+.circle-button:hover .tooltip:after {
+  visibility: visible;
+  opacity: 1;
+  filter: blur(0px);
+  -webkit-filter: blur(0px);
+}
+
+.circle-button .tooltip:after {
+  content: "Quite a lot of info can be displayed in these boxes, as they expand downwards.";
+  bottom: -150%;
 }
 
 .accept, .accept:after {
