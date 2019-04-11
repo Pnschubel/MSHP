@@ -5,45 +5,54 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimum-scale=1.0, maximum-scale=1.0">
 
-		<link href="https://fonts.googleapis.com/css?family=Source+Code+Pro:200" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=Nunito:900" rel="stylesheet">
 		<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:900" rel="stylesheet">
-		<link href="https://fonts.googleapis.com/css?family=IBM+Plex+Mono:200" rel="stylesheet">
 
-		<link href="https://fonts.googleapis.com/css?family=Poppins:900" rel="stylesheet">
 
-		<link rel="stylesheet" href="css/stylesheet.css">
-    
-    <script>
-      var modal = document.getElementsByClassName("info-modal")[0];
-      var btn = document.getElementsByClassName("info-button")[0];
-      
-      btn.onclick = function() {
-        modal.style.transform = "translate(-400px, 0px)";
-      }
 
-      window.onclick = function(event) {
-        if (event.target == modal) {
-          modal.style.transform = "translate(400px, 0px)";
-        }
-      }
-    </script>
+		<link rel="stylesheet" href="static/stylesheet.css">
+
+		<script type="text/javascript" src="hell.js"></script>
 
 		<title>NCHS Auto Shop</title>
 
 	</head>
 
-	<body>
+	<body onload="handleClicks()">
 		<header>
 		</header>
 
 		<section>
-      <div class="request">
-        <div class=""> </div>
-        <div class=""> </div>
-        <button class="multi-button"> </button>
-        <button class="multi-button"> </button>
+			<div class="request">
+				<div class="generics-wrapper">
+					<div class="vehicle">2011 Ford Focus</div>
+	        <div class="vin">VIN: 1fahp3hn6bw178792</div>
+					<div class="customer">Bonta, Matias</div>
+				</div>
+				<div class="button-wrapper">
+	        <button class="multi-button accept">
+						<div class="tooltip"></div>
+					</button>
+	        <button class="multi-button deny">
+						<div class="tooltip"></div>
+					</button>
+				</div>
       </div>
+
+			<div class="request">
+				<div class="generics-wrapper">
+					<div class="vehicle">2710 Halley Monte-Carlo</div>
+					<div class="vin">VIN: beepboop174hello0</div>
+					<div class="customer">Nobody, Seriously</div>
+				</div>
+				<div class="button-wrapper">
+					<button class="multi-button accept">
+						<div class="tooltip"></div>
+					</button>
+					<button class="multi-button deny">
+						<div class="tooltip"></div>
+					</button>
+				</div>
+			</div>
 		</section>
 
 		<footer>
