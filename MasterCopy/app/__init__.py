@@ -3,7 +3,7 @@ from flask import Flask
 myApp = Flask(__name__)
 
 #Don't forget to register your files with the app (this is why we needed workarounds)
-from app import routes
+##from app import routes
 from app import database
 from app import CarDB
 
