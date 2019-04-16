@@ -7,18 +7,13 @@ class validation:
         else:
             return 1
 
-    def vinNumber(userInput,year):
+    def vinNumber(userInput):
         userInput == userInput.strip()
-        if year <= 1981: 
-            if userInput.length() <= 17 and userInput.length() >= 11:
-                return 1 
-            else: 
-                return 0
+        if userInput.length() == 17:
+            return 1
         else:
-            if userInput.length() <= 17:
-                return 1
-            else: 
-                return 0
+            return 0
+
     def emailChecker(userInput):
         userInput == userInput.strip
         email = 0
