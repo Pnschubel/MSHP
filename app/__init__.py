@@ -27,7 +27,7 @@ def create_app(test_config=None):
         pass
     
     #import your blueprints here
-    from . import database
+    import database ##MOVED INSTANCE INTO APP AND CHANGED THIS FROM (FROM . IMPORT DATABASE TO IMPORT DATABASE) DUE TO RELATIVE FILE RETREVIAL
     #from . import dummyTester
     
     #register your blueprints here.
