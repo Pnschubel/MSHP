@@ -8,17 +8,9 @@ app = Flask(__name__)
 def form():
     return render_template('login.html')
 
-@app.route('/result', methods = ['POST','GET'])
-def result():
-    if request.method == 'POST':
-        result = request.form.to_dict() ##get into a dictionary
-        for field,userinput in result.items(): 
-            print(field, userinput)
-            return render_template("result.html", result = result)
-
 
 @app.route('/result', methods = ['POST','GET' ])
-def testResult():
+def result():
     if request.method == 'POST':
         error = None
         result = request.form.to_dict()
@@ -28,7 +20,7 @@ def testResult():
         if ok == "True":
 
             ##if required fields arent filled out
-            if hasData(result[customerName]) == 0 and hasData(result[customerEmail])  == 0 and hasData(result[repairType])  == 0:
+            if hasData(result[customerName]) == 0 and hasData(result[customerEmail])  == 0 and hasData(result[repairType])  == 0 and hasData(result[repairType]) == 0:
                 error = error + "required data /n"
                 ok = "False"
 
@@ -54,8 +46,18 @@ def testResult():
             if hasData(result[vin]) == 0:
                 ##check make
                 if hasData(result[make]) == 0:
-                    error = error + 
+                    error = error + "Vehicle make is required /n"
+                    ok = "False" 
+                if hasData(result[model]) == 0: 
+                    error = error + "Vehicle model is required /n"
+                    ok = "False" 
+                if hasData(result[year]) == 0: 
+                        error = error + "Vehicle year is required /n"
+                        ok = "False" 
 
+            ##check if the email is correct
+            if hasData(result[customerEmail]) == 0 and emailChecker(result[customerEmail]) == 0:
+                error = error + "Email is invalid /n"
 
 
             
@@ -66,9 +68,7 @@ def testResult():
         else:
             flash("Your form was successfully submitted!") 
 
-
-
-
-           
+    return render_template("login.html",error=error)
+  
 if __name__ == '__main__':
     app.run(debug = True)
