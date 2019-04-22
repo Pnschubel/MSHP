@@ -31,6 +31,7 @@ def get_db():
     
     return g.db
 
+
 #THE GOD FUNCTION
 def query_db(query, args=(), one=False):
 
@@ -38,7 +39,8 @@ def query_db(query, args=(), one=False):
     #1) Call get_db() to get conncetion to DB
     #2) Execute the query within given arguments
     #Fancry wrapper for regular get_db().execute()
-    cursor = get_db().execute(query, args)
+    db = get_db()
+    cursor = db.execute(query, args)
     
     #Returns 'all remaining' results from query. Typically have to move
     #One by by one with cursor, but fetchall loads everything into a list
@@ -47,6 +49,7 @@ def query_db(query, args=(), one=False):
     
     #closes database connection
     cursor.close()
+    db.commit()
     
     #If 'One' is true, will return top value of list. (For only one result.)
     #If 'one' is false, it'll return the entire list.
