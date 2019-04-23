@@ -18,8 +18,11 @@ with test_app.app_context():
 
     # Clear database. Hopefully you didn't have anything too important in it.
     query_db("DELETE FROM customers;")
+    query_db("DELETE FROM SQLITE_SEQUENCE WHERE name = 'customers'")
     query_db("DELETE FROM vehicles;")
+    query_db("DELETE FROM SQLITE_SEQUENCE WHERE name = 'vehicles'")
     query_db("DELETE FROM repairs;")
+    query_db("DELETE FROM SQLITE_SEQUENCE WHERE name = 'repairs'")
 
     # Presumably, "vehicles" is the top-level identity in the schema, since only one vehicle with a particular
     # ID can exist at any one time. As such, we'll list some "jobs" from the database where the vehicle and make
