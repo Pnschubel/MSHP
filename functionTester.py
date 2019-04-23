@@ -26,5 +26,5 @@ with test_app.app_context():
 #    print (repairIds)
 #    #Just to see if the query to get repairIds actually worked
 #    for repairId in repairIds:
-#        print("Repair ID:", repairId["repairId"])
+#        print("Repair ID:", repairId)
 #        print()
