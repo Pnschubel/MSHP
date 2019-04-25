@@ -148,25 +148,25 @@ def setRepairAccepted(repID, accepted):
 
 
 #Wipe Customers
-def BIG_RED_BUTTON_CUSTOMERS()
-    comfirmation = input("You are about to wipe all customers from user database... are you sure> (y/n)")
-    if confirmation.lower() = "y":
+def BIG_RED_BUTTON_CUSTOMERS():
+    confirmation = input("You are about to wipe all customers from user database... are you sure> (y/n)")
+    if confirmation.lower() == "y":
         query_db("DELETE FROM customers;")
     else:
         return ("Data whipe canceled")
 
 #Wipe vehicles
-def BIG_RED_BUTTON_VEHICLES()
-    comfirmation = input("You are about to wipe all vehicles from database... are you sure> (y/n)")
-    if confirmation.lower() = "y":
+def BIG_RED_BUTTON_VEHICLES():
+    confirmation = input("You are about to wipe all vehicles from database... are you sure> (y/n)")
+    if confirmation.lower() == "y":
         query_db("DELETE FROM vehicles;")
     else:
         return ("Data whipe canceled")
 
 #Wipe repairs
-def BIG_RED_BUTTON_REPAIRS()
-    comfirmation = input("You are about to wipe all repairs from database... are you sure> (y/n)")
-    if confirmation.lower() = "y":
+def BIG_RED_BUTTON_REPAIRS():
+    confirmation = input("You are about to wipe all repairs from database... are you sure> (y/n)")
+    if confirmation.lower() == "y":
         query_db("DELETE FROM reapirs;")
     else:
         return ("Data whipe canceled")

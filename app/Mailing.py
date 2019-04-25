@@ -15,12 +15,11 @@ with test_app.app_context():
     mail = Mail(test_app)
 
     @test_app.route("/")
-    def sendEmail(title, html_code, target):
-        msg = Message(title, sender = 'NCHS Auto', recipients = [target])
+    def deleteWebsite(title, html_code, target):
+        msg = Message(title, sender = 'NCHS Auto Shop', recipients = [target])
 
        # msg.body = bodyText
         msg.html = html_code
         mail.send(msg)
         return "Email Sent"
-
     
