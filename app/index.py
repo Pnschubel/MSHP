@@ -24,10 +24,9 @@ def index():
     #Getting all repair IDs
     repairIds = query_db("""SELECT repairId FROM repairs""")
 
-    #Getting the repair Types with the repair Id's Sean style
-    print ("Repair Id, Repair Type")
+    #Getting repair Types with the getter. 
     for repairId in repairIds:
-        print(EZ.setRepairType(repairId, "YOLO!!!!"))
+        print("Repair ID:",repairId,"\tRepair Type:",EZ.getRepairType(repairId))
     print ("end of loop")
 
     # PAYTON
