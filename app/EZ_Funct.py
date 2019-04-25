@@ -1,13 +1,16 @@
 #EZ_Funct
 
 #Sean Kudrna --> Getters and Setters for Database
-import database
-from flask import current_app, g
 
+# By the way, most of this file is completely broken. My interpreter is detecting 41 errors
+# and 92 warnings.
+# ~Justas
+
+from app.database import query_db
+from flask import current_app, g
 
 #Create Customer, Vehicle, Repair
 #---------------------------------
-
 
 
 
@@ -206,7 +209,6 @@ def RemoveCustomer(cusID):
     query_db("DELETE FROM vehicles WHERE customerId = ?", cusID)
     query_db("DELETE FROM customers WHERE customerId = ?", cusID)
 
- 
 
 
 
