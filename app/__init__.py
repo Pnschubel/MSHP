@@ -25,7 +25,7 @@ def create_app(test_config=None):
     except OSError:
         pass
     
-    # import your blueprints here
+    #import your blueprints here
     from app import database
     from app import index
     # from . import dummyTester
