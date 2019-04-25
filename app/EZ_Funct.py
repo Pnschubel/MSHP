@@ -9,6 +9,7 @@
 from app.database import query_db
 from flask import current_app, g
 
+
 #Create Customer, Vehicle, Repair
 #---------------------------------
 
