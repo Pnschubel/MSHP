@@ -69,6 +69,12 @@ def getVehicleYear(vehID):
     refPoint = vehicles.query.filter_by(vehicleId = vehID)
 
     return(refPoint.year)
+
+def getVehicleVin(vehID):
+
+    refPoint = vehicles.query.filter_by(vehicleId = vehID)
+
+    return(refPoint.vin)
    
 
 
