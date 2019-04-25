@@ -1,15 +1,15 @@
-class validation:
+class validation(object):
 
-    
+    @staticmethod 
     def hasData(userInput):
-        if userInput.length() == 0:
+        if len(userInput) == 0:
             return 0
         else:
             return 1
 
     def vinNumber(userInput):
         userInput == userInput.strip()
-        if userInput.length() == 17:
+        if len(userInput) == 17:
             return 1
         else:
             return 0

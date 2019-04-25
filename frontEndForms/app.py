@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, flash
-import validation
-
+from validation import validation
 
 app = Flask(__name__)
 
@@ -14,49 +13,51 @@ def result():
     if request.method == 'POST':
         error = None
         result = request.form.to_dict()
+        print (result)
+        print ("hello")
         ##the validation!:(
         ok = "True"
 
         if ok == "True":
 
             ##if required fields arent filled out
-            if hasData(result[customerName]) == 0 and hasData(result[customerEmail])  == 0 and hasData(result[repairType])  == 0 and hasData(result[repairType]) == 0:
+            if validation.hasData(result['customerName']) == 0 and validation.hasData(result['customerEmail'])  == 0 and validation.hasData(result['repairType'])  == 0 and validation.hasData(result[repairType]) == 0:
                 error = error + "required data /n"
                 ok = "False"
 
             ##require repairDescription if repair type is other
-            if result[repairType] == "other":
-                if hasData(result[repairDescription]) == 0: 
+            if result['repairType'] == "other":
+                if validation.hasData(result[repairDescription]) == 0: 
                     error = error + "repair description /n"
                     ok = "False"
 
             ##require vin if year,make,model is null
-            if hasData(result[make]) == 0 and hasData(result[model]) == 0 and hasData(result[year]) == 0:
+            if validation.hasData(result['make']) == 0 and validation.hasData(result['model']) == 0 and validation.hasData(result['year']) == 0:
                 ##if vin is empty incorrect
-                if hasData(result[vin]) == 0:
+                if validation.hasData(result['vin']) == 0:
                     error = error + "vehicle vin or vehicle make,model and year /n"
                     ok = "False"
                 else:
                     ## if vin number is entered incorrectly
-                    if vinNumber(result[vin]) == 0: 
+                    if validation.vinNumber(result['vin']) == 0: 
                         error = error + "vin number is incorrect"
                         ok = "False"
 
-            ##check year,make,model if vin is empty
-            if hasData(result[vin]) == 0:
+            ##check year,make,model if vn is empty
+            if validation.hasData(result['vin']) == 0:
                 ##check make
-                if hasData(result[make]) == 0:
+                if validation.hasData(result['make']) == 0:
                     error = error + "Vehicle make is required /n"
                     ok = "False" 
-                if hasData(result[model]) == 0: 
+                if validation.hasData(result['model']) == 0: 
                     error = error + "Vehicle model is required /n"
                     ok = "False" 
-                if hasData(result[year]) == 0: 
+                if validation.hasData(result['year']) == 0: 
                         error = error + "Vehicle year is required /n"
                         ok = "False" 
 
             ##check if the email is correct
-            if hasData(result[customerEmail]) == 0 and emailChecker(result[customerEmail]) == 0:
+            if validation.hasData(result['customerEmail']) == 0 and validation.emailChecker(result['customerEmail']) == 0:
                 error = error + "Email is invalid /n"
 
 
