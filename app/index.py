@@ -21,12 +21,12 @@ def index():
         print ("Repair Type:", entry["repairType"])
         print ("Repair ID:", entry["repairId"])
 
-    #Getting all repair IDs
-    repairIds = query_db("""SELECT repairId FROM repairs""")
+    myIds = EZ.getRepairIds()
 
     #Getting repair Types with the getter. 
-    for repairId in repairIds:
-        print("Repair ID:",repairId,"\tRepair Type:",EZ.getRepairType(repairId))
+    for repairId in myIds:
+        print (repairId)
+        print("Repair ID:",repairId, "\tRepair Type:",EZ.getRepairType(repairId))
     print ("end of loop")
 
     # PAYTON

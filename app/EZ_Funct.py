@@ -8,6 +8,7 @@
 
 from app.database import query_db
 from flask import current_app, g
+import array
 
 #Create Customer, Vehicle, Repair
 #---------------------------------
@@ -19,69 +20,83 @@ from flask import current_app, g
 #GETTERS
 #---------------------------------------------------------------
 
+#Get ALL RepairIds
+def getRepairIds():
+    #array for all the repairIds
+    myIds = array.array('i')
+    #Returns a list of dictionaries of all repairIds with key repairId
+    repairIds = query_db("""SELECT repairId FROM repairs""")
+    
+    #puts all the repair Ids into the array for Matias
+    for myId in repairIds:
+        myIds.append(myId["repairId"])
+
+    return myIds
+
+
 #Get Associated Info
 def getAssociatedVehicle(repID):
 
-    vehicleId =  query_db("SELECT vehicleId  FROM repairs WHERE repairId = ?", repID, True) 
+    vehicleId =  query_db("SELECT vehicleId  FROM repairs WHERE repairId = ?", (int(repID),), True) 
     return vehicleId[vehicleId]
 
 def getAssociatedCustomer(vehID):
     
-    customerId =  query_db("SELECT customerId  FROM vehicles WHERE vehicleId = ?", (vehID,), True) 
-    return customerId[customerId]
+    customerId =  query_db("SELECT customerId  FROM vehicles WHERE vehicleId = ?", (int(vehID),), True) 
+    return customerId["customerId"]
 
 
 #Get Customer Info
 def getCustomerName(custID):
    
-    customerName =  query_db("SELECT customerName FROM customers WHERE customerId = ?", (custID,), True) 
-    return customerName[customerName]
+    customerName =  query_db("SELECT customerName FROM customers WHERE customerId = ?", (int(custID),), True) 
+    return customerName["customerName"]
     
 def getCustomerEmail(custID):
 
-    customerEmail = query_db("SELECT customerEmail FROM customers WHERE customerId = ?", (custID,), True)
-    return customerEmail[customerEmail]
+    customerEmail = query_db("SELECT customerEmail FROM customers WHERE customerId = ?", (int(custID),), True)
+    return customerEmail["customerEmail"]
     
 def getCustomerPhone(custID):
 
-    customerPhone =  query_db("SELECT customerPhoneNum FROM customers WHERE customerId = ?", (custID,), True)
-    return customerPhone[customerPhoneNum]
+    customerPhone =  query_db("SELECT customerPhoneNum FROM customers WHERE customerId = ?", (int(custID),), True)
+    return customerPhone["customerPhoneNum"]
 
 #Get Vehicle Info
 def getVehicleMake(vehID):
 
-    v =  query_db("SELECT make FROM vehicles WHERE vehicleId = ?", (vehID,), True)
-    return v[make]
+    v =  query_db("SELECT make FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
+    return v["make"]
    
 def getVehicleModel(vehID):
-    v =  query_db("SELECT model FROM vehicles WHERE vehicleId = ?", (vehID,), True)
-    return v[model]
+    v =  query_db("SELECT model FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
+    return v["model"]
 
       
 def getVehicleYear(vehID):
-    v =  query_db("SELECT year FROM vehicles WHERE vehicleId = ?", (vehID,), True)
-    return v[year]
+    v =  query_db("SELECT year FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
+    return v["year"]
 
 def getVehicleVin(vehID):
-    v =  query_db("SELECT vin FROM vehicles WHERE vehicleId = ?", (vehID,), True)
-    return v[vin]      
+    v =  query_db("SELECT vin FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
+    return v["vin"]      
 
 
 #Get Repair Info
 def getRepairType(repID):
 
-    r =  query_db("SELECT repairType FROM repairs WHERE repairId = ?", int(repID), True)
-    return r[repairType]   
+    r =  query_db("SELECT repairType FROM repairs WHERE repairId = ?", (int(repID),), True)
+    return r["repairType"]   
     
 def getRepairDescription(repID):
 
-    r =  query_db("SELECT repairDescription FROM repairs WHERE repairId = ?", (repID,), True)
-    return r[repairDescription]  
+    r =  query_db("SELECT repairDescription FROM repairs WHERE repairId = ?", (int(repID),), True)
+    return r["repairDescription"]  
     
 def getRepairAccepted(repID):
 
-    r =  query_db("SELECT accepted FROM repairs WHERE repairId = ?", (repID,), True)
-    return r[accepted]  
+    r =  query_db("SELECT accepted FROM repairs WHERE repairId = ?", (int(repID),), True)
+    return r["accepted"]  
     
 
 
