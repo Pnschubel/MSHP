@@ -9,6 +9,7 @@ def create_app(test_config=None):
     myApp = Flask(__name__, instance_relative_config = True)
     
     #SECRET_KEY is to keep nasty hackers from doing dum stuff.
+    myApp.config['SECRET_KEY'] = 'comicSansBeepBoopBoopPotato'
     #DATABASE is path of our database
     myApp.config.from_mapping(SECRET_KEY="dev", DATABASE = os.path.join(myApp.instance_path, "CarDB.sqlite"))
 
@@ -27,7 +28,7 @@ def create_app(test_config=None):
         pass
     
     #import your blueprints here
-    from app import database ##MOVED INSTANCE INTO APP AND CHANGED THIS FROM (FROM . IMPORT DATABASE TO IMPORT DATABASE) DUE TO RELATIVE FILE RETREVIAL
+    from myApp import database ##MOVED INSTANCE INTO APP AND CHANGED THIS FROM (FROM . IMPORT DATABASE TO IMPORT DATABASE) DUE TO RELATIVE FILE RETREVIAL
     #from . import dummyTester
     
     #register your blueprints here.
