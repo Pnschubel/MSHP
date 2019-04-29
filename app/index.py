@@ -23,11 +23,18 @@ def index():
 
     myIds = EZ.getRepairIds()
 
-    #Getting repair Types with the getter. 
+   
+    #Setting repairTypes with setters.
+    for myId in myIds:
+        if (myId % 2 == 0):
+            EZ.setRepairType(myId, "YOLO")
+        else:
+            EZ.setRepairType(myId, "SWAG")
+    
+     #Getting repair Types with the getter. 
     for repairId in myIds:
         print (repairId)
-        print("Repair ID:",repairId, "\tRepair Type:",EZ.getRepairType(repairId))
-    print ("end of loop")
+        print("Repair ID:",repairId, "\nRepair Type:",EZ.getRepairType(repairId))
 
     # PAYTON
     # One cause of your problem might have been the autoincrementing ID field in most of your tables.
