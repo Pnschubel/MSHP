@@ -157,13 +157,18 @@ def setRepairType(repID, repairType):
 
 def setRepairDescription(repID, repairDescription):
     mySQL = concantenate("repair", "repairDescription", repairDescription)
-    query_db(mySQL, (int(vehID),))
+    query_db(mySQL, (int(repID),))
     return("repair description has been updated to " + repairDescription)
 
 def setRepairAccepted(repID, accepted):
     mySQL = concantenate("repair", "accepted", accepted)
-    query_db(mySQL, (int(vehID),))
+    query_db(mySQL, (int(repID),))
     return("status has been updated to " + accepted)
+
+def setRepairCompleted(repID, completed):
+    mySQL = concantenate("repair", "completed", completed)
+    query_db(mySQL, (int(repID),))
+    return("status has been updated to " + completed)
 
 
 #BIG RED BUTTON FUNCTIONS
@@ -190,7 +195,7 @@ def BIG_RED_BUTTON_VEHICLES():
 def BIG_RED_BUTTON_REPAIRS():
     confirmation = input("You are about to wipe all repairs from database... are you sure> (y/n)")
     if confirmation.lower() == "y":
-        query_db("DELETE FROM reapirs;")
+        query_db("DELETE FROM repairs;")
     else:
         return ("Data whipe canceled")
 
