@@ -171,6 +171,33 @@ def setRepairCompleted(repID, completed):
     return("status has been updated to " + completed)
 
 
+#THE CREATORS
+#These are how you insert new items into the database. These will...
+#   - Take all values of the table as parameters (with defaults)
+#   - Precondition: None of the Not Null values are Null 
+#   - If all is good, add to table.
+#NOTE: Create the customer, then the vehicle, then the repairs.
+#Otherwise the IDs won't exist.
+
+def createCustomer(customerName,
+                    customerEmail,
+                    customerPhoneNum = None):
+    #Only thing I'm worried about: if none = null or not.
+    query_db("INSERT INTO customers (customerName, customerEmail, customerPhoneNum) VALUES(?,?,?)", (customerName, customerEmail, customerPhoneNum))
+    return "Customer has been created."
+
+def createVehicle(make = None, 
+                    model = None,
+                    year = None,
+                    vin = None,
+                    customerId = query_db("SELECT customerId FROM customers ORDER BY ID DESC", True):
+    query_db("INSERT INTO vehicles (make, model, year, vin, customerId) VALUES(?,?,?,?,?)", (make, model, year, vin, customerId))
+    return "Vehicle has been created."
+
+def createRepair(repairType, repairDescription = None, accepted = None, completed = False, vehicleId):
+    query_db("INSERT INTO repairs (repairType, repairDescription, accepted, completed, vehicleId) VALUES(?,?,?,?,?)", (repairType, repairDescription, accepted, completed, vehicleId))
+    return "Repair has been created."
+
 #BIG RED BUTTON FUNCTIONS
 #-----------------------------------------------------------------------------------------------------------
 
