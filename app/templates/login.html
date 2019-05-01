@@ -31,8 +31,15 @@
         </fieldset>
         <p><input type = "submit" value = "submit"></p>
     </form>
-    {% if error %}
-    	<p class = "error">Error: {{ error }} </p>
-    {% endif %}
+    {% with errorMessages = get_flashed_messages() %}
+    	{% if errorMessages %}
+		<ul class=flashes>
+		{% for error in errorMessages %}
+			<li> {{ error }} </li>
+		{% endfor %}
+		</ul>
+	{% endif %}
+    {% endwith %}
+
 </body>
 </html>
