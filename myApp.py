@@ -1,10 +1,14 @@
+import os
 from flask import Flask
+from flask import render_template
 from flask_mail import Mail, Message
 from app import create_app
 
 #This NEEDS to Stay at TOP of This File. If You Move it, I Will be VERY MAD AT YOU! Be Warned...
 app = create_app()
 
+#Change the template directory for render_template
+template_dir = os.path.abspath("./app/templates")
 
 #Mailing
 #----------------------------------------------------------------------------------
@@ -32,8 +36,9 @@ def sendEmail(title, html_code, target):
 
 #Test Mailing
 @app.route("/test_sendEmail")
-def test_sendEmail(): 
-    sendEmail("Test W/Parameters", '<p style="background-color: #ff00ff;"> ...Hello i am a pink rectangle... </p>', "spkudrna@gmail.com")
+def test_sendEmail():
+    htmlCode = ('<p style="background-color: #ff00ff;"> ...Hello i am a pink rectangle... </p>')
+    sendEmail("Test W/Parameters", render_template("EmailTemplate.html"), "spkudrna@gmail.com")
     return("...Email Sent...")
 
 #End of Mailing
