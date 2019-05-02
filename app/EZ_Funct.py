@@ -8,6 +8,7 @@
 
 from app.database import query_db
 from flask import current_app, g
+import array
 
 #Create Customer, Vehicle, Repair
 #---------------------------------
@@ -19,80 +20,83 @@ from flask import current_app, g
 #GETTERS
 #---------------------------------------------------------------
 
+#Get ALL RepairIds
+def getRepairIds():
+    #array for all the repairIds
+    myIds = array.array('i')
+    #Returns a list of dictionaries of all repairIds with key repairId
+    repairIds = query_db("""SELECT repairId FROM repairs""")
+    
+    #puts all the repair Ids into the array for Matias
+    for myId in repairIds:
+        myIds.append(myId["repairId"])
+
+    return myIds
+
 
 #Get Associated Info
 def getAssociatedVehicle(repID):
 
-    refPoint = repairs.query.filter_by(repairId = repID)
-
-    return(refPoint.vehicleId)
+    vehicleId =  query_db("SELECT vehicleId  FROM repairs WHERE repairId = ?", (int(repID),), True) 
+    return vehicleId[vehicleId]
 
 def getAssociatedCustomer(vehID):
     
-    refPoint = vehicles.query.filter_by(vehicleId = vehID)
-
-    return(refPoint.customerId)
+    customerId =  query_db("SELECT customerId  FROM vehicles WHERE vehicleId = ?", (int(vehID),), True) 
+    return customerId["customerId"]
 
 
 #Get Customer Info
 def getCustomerName(custID):
-
-    refPoint = customers.query.filter_by(customerId = custID)
    
-    return (refPoint.customerName)
+    customerName =  query_db("SELECT customerName FROM customers WHERE customerId = ?", (int(custID),), True) 
+    return customerName["customerName"]
     
 def getCustomerEmail(custID):
 
-    refPoint = customers.query.filter_by(customerId = custID)
-   
-    return (refPoint.customerEmail)
+    customerEmail = query_db("SELECT customerEmail FROM customers WHERE customerId = ?", (int(custID),), True)
+    return customerEmail["customerEmail"]
     
 def getCustomerPhone(custID):
 
-    refPoint = customers.query.filter_by(customerId = custID)
-
-    return (refPoint.customerPhoneNum)
-    
+    customerPhone =  query_db("SELECT customerPhoneNum FROM customers WHERE customerId = ?", (int(custID),), True)
+    return customerPhone["customerPhoneNum"]
 
 #Get Vehicle Info
 def getVehicleMake(vehID):
 
-    refPoint = vehicles.query.filter_by(vehicleId = vehID)
-
-    return(refPoint.make)
+    v =  query_db("SELECT make FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
+    return v["make"]
    
 def getVehicleModel(vehID):
+    v =  query_db("SELECT model FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
+    return v["model"]
 
-    refPoint = vehicles.query.filter_by(vehicleId = vehID)
-   
-    return(refPoint.model)
-    
+      
 def getVehicleYear(vehID):
+    v =  query_db("SELECT year FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
+    return v["year"]
 
-    refPoint = vehicles.query.filter_by(vehicleId = vehID)
-
-    return(refPoint.year)
-   
+def getVehicleVin(vehID):
+    v =  query_db("SELECT vin FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
+    return v["vin"]      
 
 
 #Get Repair Info
 def getRepairType(repID):
 
-    refPoint = repairs.query.filter_by(repairId = repID)
-    
-    return(refPoint.repairType)
+    r =  query_db("SELECT repairType FROM repairs WHERE repairId = ?", (int(repID),), True)
+    return r["repairType"]   
     
 def getRepairDescription(repID):
 
-     refPoint = repairs.query.filter_by(repairId = repID)
-
-     return(refPoint.repairDescription)   
+    r =  query_db("SELECT repairDescription FROM repairs WHERE repairId = ?", (int(repID),), True)
+    return r["repairDescription"]  
     
 def getRepairAccepted(repID):
 
-    refPoint = repairs.query.filter_by(repairId = repID)
-
-    return(refPoint.accepted)   
+    r =  query_db("SELECT accepted FROM repairs WHERE repairId = ?", (int(repID),), True)
+    return r["accepted"]  
     
 
 
