@@ -1,0 +1,12 @@
+Accepted
+Hello {{customer name}},
+
+  Your request for your {{repairType}} has been accepted. Mr. Feid will reach out to you when the repair is completed. 
+                                                                              Thank you,
+                                                                                NCHS Auto Shop
+Denied
+Hello {{customer name}}, 
+
+  Your request for you {{repairType}} has been denied. Please do not contact Mr. Feid with your concerns. We hope to give you our service next time. 
+                                                                              Thank you,
+                                                                                NCHS Auto Shop
