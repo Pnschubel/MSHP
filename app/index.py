@@ -18,22 +18,7 @@ def index():
     print (getId)
 
 
-    #I'm going to create a new customer with bare minimum.
-    EZ.createCustomer(customerName = "Boring Betty",
-                        customerEmail = "bb@boring.com")
-    EZ.createVehicle(vin = "00011122233344")
-    EZ.createRepair(repairType = "Oil Change")
-
-    #This is a customer with everything
-    EZ.createCustomer(customerName = "Kool Kyle",
-                        customerEmail = "koolaidkid@swag.com",
-                        customerPhoneNum = "347-347-9345")
-    EZ.createVehicle(make = "Kardial", model = "Roadster",
-                        year = "3402", vin = "54321543214321")
-    EZ.createRepair(repairType = "Flight Drive Alignment",
-                    repairDescription = "Needs accents")
-    
-    # for entry in entries:
+       # for entry in entries:
         #This is where we can put the tests to make
         #sure that Sean's things actually work.
     #    print ("Repair Type:", entry["repairType"])

@@ -40,6 +40,12 @@ def getAssociatedVehicle(repID):
     vehicleId =  query_db("SELECT vehicleId  FROM repairs WHERE repairId = ?", (int(repID),), True) 
     return vehicleId[vehicleId]
 
+def getAssociatedVehicles(customerID):
+    #THIS RETURNS AN ARRAY OF DICTIONARIES
+    #Which should ve fine since you're the only one using it.
+    vehicleIds = query_db("SELECT vehicleId FROM vehicles WHERE customerId = ?", (int(customerID),))
+    return 
+
 def getAssociatedCustomer(vehID):
     
     customerId =  query_db("SELECT customerId  FROM vehicles WHERE vehicleId = ?", (int(vehID),), True) 
