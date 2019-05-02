@@ -15,6 +15,7 @@ with test_app.app_context():
     makes = ["Honda", "Motorolla", "Old", "Pontiac", "Subaru"]
     models = ["Accord", "Car", "Blue", "Pilot", "Forester"]
     types = ["oil change", "oil change", "tire rotation", "ATF Change"]
+    completed = [True, False]
 
     # Clear database. Hopefully you didn't have anything too important in it.
     query_db("DELETE FROM customers;")
@@ -32,8 +33,8 @@ with test_app.app_context():
                  (customerNames[i], customerEmail[i]))
         query_db("INSERT INTO vehicles (make, model, customerId) VALUES(?, ?, ?)",
                  (makes[i], models[i], i + 1))
-        query_db("INSERT INTO repairs (repairType, vehicleId) VALUES(?, ?)",
-                 (random.choice(types), i + 1))
+        query_db("INSERT INTO repairs (repairType, completed,  vehicleId) VALUES(?, ?)",
+                 (random.choice(types), random.choice(completed), i + 1))
 
     # This will retrieve all values enumerated after the SELECT statement by first matching together rows from
     # 'customers' and 'vehicles' based on customerId (so that the owner is matched with their car), and then

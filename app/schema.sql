@@ -7,12 +7,11 @@
     --ID's are used to identify element of the table. Each section of data has an id.
     --You can't nest tables, but you can use parent-child tables where one element of child is id of parent.
     --Kids can find parents, not vice versa, so we'll have to work backwards.
-    
+
 --Pre-Existing Stuff gets added to the tables
 DROP TABLE IF EXISTS customers;
 DROP TABLE IF EXISTS vehicles;
 DROP TABLE IF EXISTS repairs;
-
 
 CREATE TABLE customers(
     customerId INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
@@ -40,3 +39,4 @@ CREATE TABLE repairs(
     vehicleId INT NOT NULL,
     FOREIGN KEY(vehicleId) REFERENCES vehicles(vehicleId)
     );
+

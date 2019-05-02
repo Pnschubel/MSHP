@@ -190,12 +190,22 @@ def createVehicle(make = None,
                     model = None,
                     year = None,
                     vin = None,
-                    customerId = query_db("SELECT customerId FROM customers ORDER BY ID DESC", True):
-    query_db("INSERT INTO vehicles (make, model, year, vin, customerId) VALUES(?,?,?,?,?)", (make, model, year, vin, customerId))
+                    customerId = 'default'):
+    #If customerId isn't specified, gets the most recent one.
+    if (customerId == 'default'):
+        getId = query_db("SELECT customerId FROM customers ORDER BY customerId DESC", one = True)
+    query_db("INSERT INTO vehicles (make, model, year, vin, customerId) VALUES(?,?,?,?,?)", (make, model, year, vin, getId['customerId']))
     return "Vehicle has been created."
 
-def createRepair(repairType, repairDescription = None, accepted = None, completed = False, vehicleId):
-    query_db("INSERT INTO repairs (repairType, repairDescription, accepted, completed, vehicleId) VALUES(?,?,?,?,?)", (repairType, repairDescription, accepted, completed, vehicleId))
+def createRepair(repairType,
+                    repairDescription = None,
+                    accepted = None,
+                    completed = False,
+                    vehicleId = 'default'):
+    #If vehicleId isn't specified, gets the most recent one
+    if (vehicleId == 'default'):
+        getId = query_db("SELECT vehicleId FROM vehicles ORDER BY vehicleId DESC", one = True)
+    query_db("INSERT INTO repairs (repairType, repairDescription, accepted, completed, vehicleId) VALUES(?,?,?,?,?)", (repairType, repairDescription, accepted, completed, getId['vehicleId']))
     return "Repair has been created."
 
 #BIG RED BUTTON FUNCTIONS
