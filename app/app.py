@@ -71,7 +71,7 @@ def result():
                         ok = "False" 
 
             ##check if the email is correct
-            if validation.hasData(result['customerEmail']) == 0 and validation.emailChecker(result['customerEmail']) == 0:
+            if validation.emailChecker(result['customerEmail']) == "False":
                     flash("Email is invalid")
                     print ("this email is WRONG")
 
