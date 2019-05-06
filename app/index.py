@@ -26,7 +26,12 @@ def index():
 
     myIds = EZ.getRepairIds()
 
-   
+  
+    #This is me testing if the removers work -- I'm just gonna test customer.
+    vehId = EZ.getAssociatedVehicle(myIds[2])
+    cusId = EZ.getAssociatedCustomer(vehId)
+
+    EZ.RemoveCustomer(cusId)
     #Setting repairTypes with setters.
     # for myId in myIds:
     #     if (myId % 2 == 0):

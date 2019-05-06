@@ -35,19 +35,23 @@ def getRepairIds():
 
 
 #Get Associated Info
-def getAssociatedVehicle(repID):
+def getAssociatedRepairs(vehID):
+    #THIS RETURNS AN ARRAY OF DICTIONARIES
+    #Which should be fine since you're the only using it within this file.
+    repairIds = query_db("SELECT repairId FROM repairs WHERE vehicleId = ?", int(vehID),)
+    return repairIds
 
+def getAssociatedVehicle(repID):
     vehicleId =  query_db("SELECT vehicleId  FROM repairs WHERE repairId = ?", (int(repID),), True) 
-    return vehicleId[vehicleId]
+    return vehicleId["vehicleId"]
 
 def getAssociatedVehicles(customerID):
     #THIS RETURNS AN ARRAY OF DICTIONARIES
-    #Which should ve fine since you're the only one using it.
+    #Which should be fine since you're the only using it within this file.
     vehicleIds = query_db("SELECT vehicleId FROM vehicles WHERE customerId = ?", (int(customerID),))
-    return 
+    return vehicleIds
 
 def getAssociatedCustomer(vehID):
-    
     customerId =  query_db("SELECT customerId  FROM vehicles WHERE vehicleId = ?", (int(vehID),), True) 
     return customerId["customerId"]
 
@@ -249,27 +253,25 @@ def BIG_RED_BUTTON_REPAIRS():
 #Remove repair
 def RemoveRepair(repID):
     query_db("DELETE FROM repairs WHERE repairId = ?", repID)
+    return "Repair has been deleted"
 
 #Remove vehicle
 def RemoveVehicle(vehID):
     query_db("DELETE FROM vehicles WHERE vehicleId = ?", vehID)
     query_db("DELETE FROM repairs WHERE vehicleId = ?", vehID)
+    return "Vehicle has been deleted"
     #Deletes repairs associated with vehicle
 
 #Remove customer
 def RemoveCustomer(cusID):
-    #Write while loop until refPoint does not exist if doesnt work. 
-
-    refPoint = vehicle.query.filter_by(customerId = cusID)
-    #Sets point of referance to customerId in vehicle table
-
-    transferPoint = repairs.query.filter_by(vehicleId = refPoint.vehicleId)
-    #Gets a point of transfer that accesses vehicleId in repairs table using refPoint
-
-    query_db("DELETE FROM repairs WHERE repairId = ?", transferPoint.repairId)
-    #Deletes repairs associated with deleted car using repairId gathered from transferPoint
-    query_db("DELETE FROM vehicles WHERE customerId = ?", cusID)
+    #Gets all vehicleIds associated with this customer. 
+    vehIds = getAssociatedVehicles(cusID)
+    
+    for vehId in vehIds:
+        RemoveVehile(vehId["vehicleId"])
+ 
     query_db("DELETE FROM customers WHERE customerId = ?", cusID)
+    return "Customer has been deleted"
 
 
 
