@@ -28,7 +28,6 @@ def create_app(test_config=None):
     #import your blueprints here
     from app import database
     from app import index
-    import dummyTester
     
     # register your blueprints here.
     # Can use flask tutorial
