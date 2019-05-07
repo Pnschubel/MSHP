@@ -219,7 +219,8 @@ def createRepair(repairType,
     query_db("INSERT INTO repairs (repairType, repairDescription, accepted, completed, vehicleId) VALUES(?,?,?,?,?)", (repairType, repairDescription, accepted, completed, getId['vehicleId']))
     return "Repair has been created."
 
-#BIG RED BUTTON FUNCTIONS
+#BIG RED BUTTON FUNCTIONS --
+    #These haven't been troubleshooted, so use with caution.
 #-----------------------------------------------------------------------------------------------------------
 
 
