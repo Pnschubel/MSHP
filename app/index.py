@@ -1,5 +1,6 @@
 from flask import Blueprint, render_template, session
 from app.database import query_db
+import app.EZ_Funct as EZ
 
 bp = Blueprint("index", __name__)
 
@@ -13,14 +14,20 @@ def index():
         FROM ((vehicles INNER JOIN customers ON vehicles.customerID = customers.customerID)
         INNER JOIN repairs ON vehicles.vehicleId = repairs.vehicleID)""")
 
-    print ("The file is running.")
+
     for entry in entries:
+        #This is where we can put the tests to make
+        #sure that Sean's things actually work.
+        print ("Repair Type:", entry["repairType"])
         print ("Repair ID:", entry["repairId"])
 
-    #Getting all repair IDs
-    repairIds = query_db("""SELECT repairId FROM repairs""")
+    myIds = EZ.getRepairIds()
 
-    print (repairIds)
+    #Getting repair Types with the getter. 
+    for repairId in myIds:
+        print (repairId)
+        print("Repair ID:",repairId, "\tRepair Type:",EZ.getRepairType(repairId))
+    print ("end of loop")
 
     # PAYTON
     # One cause of your problem might have been the autoincrementing ID field in most of your tables.

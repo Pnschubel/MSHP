@@ -7,7 +7,7 @@ from app import create_app
 #This NEEDS to Stay at TOP of This File. If You Move it, I Will be VERY MAD AT YOU! Be Warned...
 app = create_app()
 
-#Change the template directory for render_template
+#Change the Template Directory for render_template
 template_dir = os.path.abspath("./app/templates")
 
 #Mailing
