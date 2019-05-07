@@ -35,13 +35,24 @@ def getRepairIds():
 
 
 #Get Associated Info
-def getAssociatedVehicle(repID):
+def getAssociatedRepairs(vehID):
+    #THIS RETURNS AN ARRAY OF DICTIONARIES
+    #Which should be fine since you're the only using it within this file.
+    repairIds = query_db("SELECT repairId FROM repairs WHERE vehicleId = ?", int(vehID),)
+    return repairIds
 
-    vehicleId =  query_db("SELECT vehicleId  FROM repairs WHERE repairId = ?", (int(repID),), True) 
-    return vehicleId[vehicleId]
+def getAssociatedVehicle(repID):
+    vehicleId =  query_db("SELECT vehicleId  FROM repairs WHERE repairId = ?", (int(repID),), True)
+    print("TEST:", vehicleId)#Test
+    return vehicleId["vehicleId"]
+
+def getAssociatedVehicles(customerID):
+    #THIS RETURNS AN ARRAY OF DICTIONARIES
+    #Which should be fine since you're the only using it within this file.
+    vehicleIds = query_db("SELECT vehicleId FROM vehicles WHERE customerId = ?", (int(customerID),))
+    return vehicleIds
 
 def getAssociatedCustomer(vehID):
-    
     customerId =  query_db("SELECT customerId  FROM vehicles WHERE vehicleId = ?", (int(vehID),), True) 
     return customerId["customerId"]
 
@@ -105,50 +116,108 @@ def getRepairAccepted(repID):
 #I'm pretty sure this is how you wrap sql code into python? we may have to do this for the methods above if they dont work... shouldn't be too difficult to update if needed.
 #(I did these a different way just in case the ones above dont work --> gives us options)
 
+#Concantenator with variable because we need to put variable in the string of SQL
+
+#Make sure table is singular (though the tables are plural)
+def concantenate(table, row, var):
+    mySQL = "UPDATE " + table + "s SET " + row + " = \"" + var
+    mySQL = mySQL + "\" WHERE " + table + "Id = ?"
+
+    return mySQL
 
 
 #Set Customer Info
 def setCustomerName(custID, name):
-
-    query_db("UPDATE customers SET customerName = ? WHERE customerId = ?", (name, custID))
+    mySQL = concantenate("customer", "customerName", name)
+    query_db(mySQL, (int(custID),))
     return("customerName has been updated to " + name)
 
 def setCustomerEmail(custID, email):
-    query_db("UPDATE customers SET customerEmail = ? WHERE customerId = ?", (email, custID))
+    mySQL = concantenate("customer", "customerEmail", email)
+    query_db(mySQL, (int(custID),))
     return("customerEmail has been updated to " + email)
 
 def setCustomerPhoneNum(custID, phoneNum):
-    query_db("UPDATE customers SET customerPhoneNum = ? WHERE customerId = ?" , (phoneNum, custID))
+    mySQL = concantenate("customer", "customerPhoneNum", phoneNum)
+    query_db(mySQL, (int(custID),))
     return("customerPhoneNum has been updated to " + phoneNum)
 
 
 #Set Vehicle Info
 def setVehicleMake(vehID, make):
-    query_db("UPDATE vehicles SET make = ? WHERE customerId = ?", (make, vehID))
+    mySQL = concantenate("vehicle", "make", make)
+    query_db(mySQL, (int(vehID),))
     return("make has been updated to " + make)
 
 def setVehicleModel(vehID, model):
-    query_db("UPDATE vehicles SET model = ? WHERE customerId = ?", (model, vehID))
+    mySQL = concantenate("vehicle", "model", model)
+    query_db(mySQL, (int(vehID),))
     return("model has been updated to " + model)
 
 def setVehicleYear(vehID, year):
-    query_db("UPDATE vehicles SET year = ? WHERE customerId = ?", (year, vehID))
+    mySQL = concantenate("vehicle", "year", year)
+    query_db(mySQL, (int(vehID),))
     return("year has been updated to " + year)
 
 
 #Set Repair Info
 def setRepairType(repID, repairType):
-    query_db("UPDATE repairs SET repairType = ? WHERE repairId = ?", (repairType, repID))
+    mySQL = concantenate("repair", "repairType", repairType)
+    query_db(mySQL, (int(repID),))
     return("repair type has been updated to " + repairType)
 
 def setRepairDescription(repID, repairDescription):
-    query_db("UPDATE repairs SET repairDescription = ? WHERE repairId = ?", (repairDescription, repID))
+    mySQL = concantenate("repair", "repairDescription", repairDescription)
+    query_db(mySQL, (int(repID),))
     return("repair description has been updated to " + repairDescription)
 
 def setRepairAccepted(repID, accepted):
-    query_db("UPDATE repairs SET accepted = ? WHERE repairId = ?", (accepted, repID))
+    mySQL = concantenate("repair", "accepted", accepted)
+    query_db(mySQL, (int(repID),))
     return("status has been updated to " + accepted)
 
+def setRepairCompleted(repID, completed):
+    mySQL = concantenate("repair", "completed", completed)
+    query_db(mySQL, (int(repID),))
+    return("status has been updated to " + completed)
+
+
+#THE CREATORS
+#These are how you insert new items into the database. These will...
+#   - Take all values of the table as parameters (with defaults)
+#   - Precondition: None of the Not Null values are Null 
+#   - If all is good, add to table.
+#NOTE: Create the customer, then the vehicle, then the repairs.
+#Otherwise the IDs won't exist.
+
+def createCustomer(customerName,
+                    customerEmail,
+                    customerPhoneNum = None):
+    #Only thing I'm worried about: if none = null or not.
+    query_db("INSERT INTO customers (customerName, customerEmail, customerPhoneNum) VALUES(?,?,?)", (customerName, customerEmail, customerPhoneNum))
+    return "Customer has been created."
+
+def createVehicle(make = None, 
+                    model = None,
+                    year = None,
+                    vin = None,
+                    customerId = 'default'):
+    #If customerId isn't specified, gets the most recent one.
+    if (customerId == 'default'):
+        getId = query_db("SELECT customerId FROM customers ORDER BY customerId DESC", one = True)
+    query_db("INSERT INTO vehicles (make, model, year, vin, customerId) VALUES(?,?,?,?,?)", (make, model, year, vin, getId['customerId']))
+    return "Vehicle has been created."
+
+def createRepair(repairType,
+                    repairDescription = None,
+                    accepted = None,
+                    completed = False,
+                    vehicleId = 'default'):
+    #If vehicleId isn't specified, gets the most recent one
+    if (vehicleId == 'default'):
+        getId = query_db("SELECT vehicleId FROM vehicles ORDER BY vehicleId DESC", one = True)
+    query_db("INSERT INTO repairs (repairType, repairDescription, accepted, completed, vehicleId) VALUES(?,?,?,?,?)", (repairType, repairDescription, accepted, completed, getId['vehicleId']))
+    return "Repair has been created."
 
 #BIG RED BUTTON FUNCTIONS
 #-----------------------------------------------------------------------------------------------------------
@@ -174,7 +243,7 @@ def BIG_RED_BUTTON_VEHICLES():
 def BIG_RED_BUTTON_REPAIRS():
     confirmation = input("You are about to wipe all repairs from database... are you sure> (y/n)")
     if confirmation.lower() == "y":
-        query_db("DELETE FROM reapirs;")
+        query_db("DELETE FROM repairs;")
     else:
         return ("Data whipe canceled")
 
@@ -184,28 +253,26 @@ def BIG_RED_BUTTON_REPAIRS():
 
 #Remove repair
 def RemoveRepair(repID):
-    query_db("DELETE FROM repairs WHERE repairId = ?", repID)
+    query_db("DELETE FROM repairs WHERE repairId = ?", (int(repID),))
+    return "Repair has been deleted"
 
 #Remove vehicle
 def RemoveVehicle(vehID):
-    query_db("DELETE FROM vehicles WHERE vehicleId = ?", vehID)
-    query_db("DELETE FROM repairs WHERE vehicleId = ?", vehID)
+    query_db("DELETE FROM vehicles WHERE vehicleId = ?", (int(vehID),))
+    query_db("DELETE FROM repairs WHERE vehicleId = ?", (int(vehID),))
+    return "Vehicle has been deleted"
     #Deletes repairs associated with vehicle
 
 #Remove customer
 def RemoveCustomer(cusID):
-    #Write while loop until refPoint does not exist if doesnt work. 
-
-    refPoint = vehicle.query.filter_by(customerId = cusID)
-    #Sets point of referance to customerId in vehicle table
-
-    transferPoint = repairs.query.filter_by(vehicleId = refPoint.vehicleId)
-    #Gets a point of transfer that accesses vehicleId in repairs table using refPoint
-
-    query_db("DELETE FROM repairs WHERE repairId = ?", transferPoint.repairId)
-    #Deletes repairs associated with deleted car using repairId gathered from transferPoint
-    query_db("DELETE FROM vehicles WHERE customerId = ?", cusID)
-    query_db("DELETE FROM customers WHERE customerId = ?", cusID)
+    #Gets all vehicleIds associated with this customer. 
+    vehIds = getAssociatedVehicles(cusID)
+    
+    for vehId in vehIds:
+        RemoveVehicle(vehId["vehicleId"])
+ 
+    query_db("DELETE FROM customers WHERE customerId = ?", (int(cusID),))
+    return "Customer has been deleted"
 
 
 
