@@ -10,7 +10,7 @@ def create_app(test_config=None):
     
     # SECRET_KEY is to keep nasty hackers from doing dum stuff.
     # DATABASE is path of our database
-    myApp.config.from_mapping(SECRET_KEY="dev", DATABASE=os.path.join(myApp.instance_path, "CarDB.sqlite"))
+    myApp.config.from_mapping(SECRET_KEY="superSecretGlobalKey", DATABASE=os.path.join(myApp.instance_path, "CarDB.sqlite"))
 
     if test_config is None:
         # If there is a configured instance, load it. config.py can store values

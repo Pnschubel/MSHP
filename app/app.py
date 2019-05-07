@@ -5,7 +5,7 @@ import validation
 app = Flask(__name__)
 
 ##create_app()
-app.config['SECRET_KEY'] = 'hanas password'
+app.config['SECRET_KEY'] = 'superSecretGlobalKey'
 
 @app.route('/')
 def form():
