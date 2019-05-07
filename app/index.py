@@ -39,6 +39,9 @@ def index():
     #     else:
     #         EZ.setRepairType(myId, "SWAG")
     
+    #You have to grab the repairIds again because they've changed.
+    myIds = EZ.getRepairIds()
+    
     #Getting repair Types with the getter. 
     for repairId in myIds:
         print (repairId)

@@ -42,7 +42,8 @@ def getAssociatedRepairs(vehID):
     return repairIds
 
 def getAssociatedVehicle(repID):
-    vehicleId =  query_db("SELECT vehicleId  FROM repairs WHERE repairId = ?", (int(repID),), True) 
+    vehicleId =  query_db("SELECT vehicleId  FROM repairs WHERE repairId = ?", (int(repID),), True)
+    print("TEST:", vehicleId)#Test
     return vehicleId["vehicleId"]
 
 def getAssociatedVehicles(customerID):
@@ -252,13 +253,13 @@ def BIG_RED_BUTTON_REPAIRS():
 
 #Remove repair
 def RemoveRepair(repID):
-    query_db("DELETE FROM repairs WHERE repairId = ?", repID)
+    query_db("DELETE FROM repairs WHERE repairId = ?", (int(repID),))
     return "Repair has been deleted"
 
 #Remove vehicle
 def RemoveVehicle(vehID):
-    query_db("DELETE FROM vehicles WHERE vehicleId = ?", vehID)
-    query_db("DELETE FROM repairs WHERE vehicleId = ?", vehID)
+    query_db("DELETE FROM vehicles WHERE vehicleId = ?", (int(vehID),))
+    query_db("DELETE FROM repairs WHERE vehicleId = ?", (int(vehID),))
     return "Vehicle has been deleted"
     #Deletes repairs associated with vehicle
 
@@ -268,9 +269,9 @@ def RemoveCustomer(cusID):
     vehIds = getAssociatedVehicles(cusID)
     
     for vehId in vehIds:
-        RemoveVehile(vehId["vehicleId"])
+        RemoveVehicle(vehId["vehicleId"])
  
-    query_db("DELETE FROM customers WHERE customerId = ?", cusID)
+    query_db("DELETE FROM customers WHERE customerId = ?", (int(cusID),))
     return "Customer has been deleted"
 
 
