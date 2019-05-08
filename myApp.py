@@ -30,7 +30,7 @@ with app.app_context():
     
 #Create Mailing Function
 def sendEmail(title, html_code, target):
-    msg = Message(title, sender = 'NCHS Auto Shop', recipients = [target])ok = "False"
+    msg = Message(title, sender = 'NCHS Auto Shop', recipients = [target])
     msg.html = html_code
     mail.send(msg)
 
@@ -42,66 +42,6 @@ def form():
 def result():
     if request.method == 'POST':
         result = request.form.to_dict()
-
-	##the validation!:(
-        ok = "True"
-
-        if ok == "True":
-            ##if required fields arent filled out
-            if validation.hasData(result['customerName']) == 0:
-                print("required name")
-                flash("required name")
-
-                ok = "False"
-
-            if  validation.hasData(result['customerEmail'])  == 0:
-                print("required email")
-                flash("required email")
-		ok = "False"
-
-            if validation.hasData(result['repairType'])  == 0:
-                print("required fields aint filled out")
-                flash("required repairType")
-                ok = "False"
-
-            ##require repairDescription if repair type is other
-            if result['repairType'] == "other":
-                if validation.hasData(result['repairDescription']) == $
-                    print("require repair description")
-                    flash("required email")
-                    ok = "False"
-
-            ##require vin if year,make,model is null
-            if validation.hasData(result['make']) == 0 and validation.$
-                ##if vin is empty incorrect
-                if validation.hasData(result['vin']) == 0:
-                    flash("vehicle vin or vehicle make,model and year")
-                    ok = "False"
-                else:
-                    ## if vin number is entered incorrectly
-                    if validation.vinNumber(result['vin']) == 0:
-                        flash("vin number is incorrect")
-                        ok = "False"
-
-            ##check year,make,model if vn is empty
-            if validation.hasData(result['vin']) == 0:
-
-                ##check make
-		if validation.hasData(result['make']) == 0:
-                    flash("Vehicle make is required")
-                    ok = "False"
-                if validation.hasData(result['model']) == 0:
-                    flash("Vehicle model is required")
-                    ok = "False"
-                if validation.hasData(result['year']) == 0:
-                        flash("Vehicle year is required")
-                        ok = "False"
-
-            ##check if the email is correct
-            if validation.emailChecker(result['customerEmail']) == "Fa$
-                    flash("Email is invalid")
-                    print ("this email is WRONG")
-    return render_template("login.html")
 
 
 
