@@ -23,7 +23,7 @@ with app.app_context():
     app.config['MAIL_USE_TLS'] = False
     app.config['MAIL_USE_SSL'] = True
     mail = Mail(app)
-    print("See")
+    
     
 #Create Mailing Function
 def sendEmail(title, html_code, target):
@@ -38,7 +38,7 @@ def sendEmail(title, html_code, target):
 @app.route("/test_sendEmail")
 def test_sendEmail():
     htmlCode = ('<p style="background-color: #ff00ff;"> ...Hello i am a pink rectangle... </p>')
-    sendEmail("Test W/Parameters", render_template("EmailTemplate.html"), "spkudrna@gmail.com")
+    sendEmail("This is an Emailing Test!", render_template("EmailTemplate.html"), "spkudrna@gmail.com")
     return("...Email Sent...")
 
 #End of Mailing
