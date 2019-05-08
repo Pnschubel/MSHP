@@ -5,6 +5,7 @@ from flask import request
 from flask import flash
 from flask_mail import Mail, Message
 from app import create_app
+from app import validation
 
 #This NEEDS to Stay at TOP of This File. If You Move it, I Will be VERY MAD AT YOU! Be Warned...
 app = create_app()
@@ -39,14 +40,14 @@ def sendEmail(title, html_code, target):
 #----------------------------------------------------------------------------------
 @app.route('/')
 def form():
-    return render_templater('login.html')
+    return render_template('login.html')
 
 @app.route('/result', methods = ['POST','GET' ])
 def result():
     if request.method == 'POST':
         result = request.form.to_dict()
 
-##the validation!:(
+    ##the validation!:(
         ok = "True"
         
         if ok == "True":
@@ -73,32 +74,23 @@ def result():
                     print("require repair description")
                     flash("required email")
                     ok = "False"
-
-            ##require vin if year,make,model is null
-            if validation.hasData(result['make']) == 0 and validation.hasData(result['model']) == 0 and validation.hasData(result['year']) == 0:
-                ##if vin is empty incorrect
-                if validation.hasData(result['vin']) == 0:
-                    flash("vehicle vin or vehicle make,model and year")
+            
+            if validation.hasData(result['vin']) == 1:
+                ## if vin number is entered incorrerctly
+                if validation.vinNumber(result['vin']) == 0: 
+                    flash("vin number is invalid")
                     ok = "False"
-                else:
-                    ## if vin number is entered incorrectly
-                    if validation.vinNumber(result['vin']) == 0: 
-                        flash("vin number is incorrect")
-                        ok = "False"
-
-            ##check year,make,model if vn is empty
-            if validation.hasData(result['vin']) == 0:
                 
-                ##check make
-                if validation.hasData(result['make']) == 0:
-                    flash("Vehicle make is required")
-                    ok = "False" 
-                if validation.hasData(result['model']) == 0: 
-                    flash("Vehicle model is required")
-                    ok = "False" 
-                if validation.hasData(result['year']) == 0: 
-                        flash("Vehicle year is required")
-                        ok = "False" 
+            ##check make
+            if validation.hasData(result['make']) == 0:
+                flash("Vehicle make is required")
+                ok = "False" 
+            if validation.hasData(result['model']) == 0: 
+                flash("Vehicle model is required")
+                ok = "False" 
+            if validation.hasData(result['year']) == 0: 
+                flash("Vehicle year is required")
+                ok = "False" 
 
             ##check if the email is correct
             if validation.emailChecker(result['customerEmail']) == "False":
@@ -113,6 +105,10 @@ def test_sendEmail():
     htmlCode = ('<p style="background-color: #ff00ff;"> ...Hello i am a pink rectangle... </p>')
     sendEmail("Test W/Parameters", render_template("EmailTemplate.html"), "spkudrna@gmail.com")
     return("...Email Sent...")
+
+@app.route("/admin")
+def adminConsole():
+    render_template("console.html")
 
 #This NEEDS to Stay at BOTTOM of This File. If You Move it, I Will be VERY MAD AT YOU! Be Warned...
 if __name__ == "__main__":
