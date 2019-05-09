@@ -6,7 +6,7 @@ from flask import flash
 from flask_mail import Mail, Message
 from app import create_app
 from app import validation
-from app import toolKit
+from app import toolkit
 
 #This NEEDS to Stay at TOP of This File. If You Move it, I Will be VERY MAD AT YOU! Be Warned...
 app = create_app()
