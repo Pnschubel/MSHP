@@ -22,80 +22,18 @@
 		</header>
 
 		<section>
-			<div class="request">
-				<div class="generics-wrapper">
-					<div class="vehicle">2011 Ford Focus</div>
-					<div class="vin">1fahp3hn6bw178792</div>
-					<div class="customer">Bonta, Matias</div>
-				</div>
-				<div class="info-wrapper">
-					<button class="circle-button"><div class="triangle"></div><div class="tooltip"></div></button>
-				</div>
-				<div class="button-wrapper">
-					<button class="multi-button accept">
-						<div class="tooltip"></div>
-					</button>
-					<button class="multi-button deny">
-						<div class="tooltip"></div>
-					</button>
-				</div>
-			</div>
-
-			<div class="request">
-				<div class="generics-wrapper">
-					<div class="vehicle">2002 Porsche 911</div>
-					<div class="vin">WP0CA29972S650104</div>
-					<div class="customer">Rexal, Alexander</div>
-				</div>
-				<div class="info-wrapper">
-					<button class="circle-button"><div class="triangle"></div><div class="tooltip"></div></button>
-				</div>
-				<div class="button-wrapper">
-					<button class="multi-button accept">
-						<div class="tooltip"></div>
-					</button>
-					<button class="multi-button deny">
-						<div class="tooltip"></div>
-					</button>
-				</div>
-			</div>
-
-			<div class="request">
-				<div class="generics-wrapper">
-					<div class="vehicle">2710 Halley Monte-Carlo</div>
-					<div class="vin">thisisnotavinnum0</div>
-					<div class="customer">Nobody, Seriously</div>
-				</div>
-				<div class="info-wrapper">
-					<button class="circle-button"><div class="triangle"></div><div class="tooltip"></div></button>
-				</div>
-				<div class="button-wrapper">
-					<button class="multi-button accept">
-						<div class="tooltip"></div>
-					</button>
-					<button class="multi-button deny">
-						<div class="tooltip"></div>
-					</button>
-				</div>
-			</div>
-
 			{% for repID in RepairIDs %}
 			<div class="request">
 				<div class="generics-wrapper">
 					<div class="vehicle"> {{getVehicleYear(getAssociatedVehicle(repID))}} {{getVehicleMake(getAssociatedVehicle(repID))}} {{getVehicleModel(getAssociatedVehicle(repID))}} </div>
 					<div class="vin">  {{getVehicleVIN(getAssociatedVehicle(repID))}} </div>
 					<div class="customer">  {{getCustomerName(getAssociatedCustomer(repID))}} </div>
+					<div class="information">  {{getRepairType(repID)}} : {{getRepairInfo(repID)}} </div>
 				</div>
-				<div class="info-wrapper">
-					<button class="circle-button"><div class="triangle"></div><div class="tooltip"></div></button>
-				</div>
+				
 				<div class="button-wrapper">
-					<button class="multi-button accept">
-						<div class="tooltip"></div>
-					</button>
-					<button class="multi-button deny">
-						<div class="tooltip"></div>
-					</button>
+					<button class="multi-button {{'accept' if getRepairAccepted(repID) == False and getRepairCompleted(repID) == False}}{{'print' if getRepairAccepted(repID) == True and getRepairCompleted(repID) == False}}"></button>
+					<button class="multi-button {{'deny' if getRepairAccepted(repID) == False and getRepairCompleted(repID) == False}}{{'complete' if getRepairAccepted(repID) == True and getRepairCompleted(repID) == False}}"></button>
 				</div>
 			</div>
 			{% endfor %}
