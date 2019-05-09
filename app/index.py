@@ -1,6 +1,6 @@
 from flask import Blueprint, render_template, session
 from app.database import query_db
-import app.EZ_Funct as EZ
+import app.toolkit as EZ
 
 bp = Blueprint("index", __name__)
 
