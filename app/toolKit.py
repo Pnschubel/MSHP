@@ -278,25 +278,3 @@ def RemoveCustomer(cusID):
  
     query_db("DELETE FROM customers WHERE customerId = ?", (int(cusID),))
     return "Customer has been deleted"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    
-
-
-    
