@@ -108,6 +108,11 @@ def getRepairAccepted(repID):
 
     r =  query_db("SELECT accepted FROM repairs WHERE repairId = ?", (int(repID),), True)
     return r["accepted"]  
+
+def getRepairCompleted(repID):
+
+    r =  query_db("SELECT completed FROM repairs WHERE repairId = ?", (int(repID),), True)
+    return r["completed"]  
     
 
 
