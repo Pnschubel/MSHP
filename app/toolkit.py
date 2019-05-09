@@ -27,7 +27,7 @@ def getRepairIds():
     #Returns a list of dictionaries of all repairIds with key repairId
     repairIds = query_db("""SELECT repairId FROM repairs""")
     
-    #puts all the repair Ids into the array for Matias
+    #puts all the repair Ids into the array for Matias 
     for myId in repairIds:
         myIds.append(myId["repairId"])
 
@@ -85,7 +85,7 @@ def getVehicleModel(vehID):
 
       
 def getVehicleYear(vehID):
-    v =  query_db("SELECT year FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
+    v =  query_db("SELECT year FROM vehicles WHERE vehicleId = ?", (int(v ehID),), True)
     return v["year"]
 
 def getVehicleVin(vehID):
