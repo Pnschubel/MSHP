@@ -85,7 +85,7 @@ def getVehicleModel(vehID):
 
       
 def getVehicleYear(vehID):
-    v =  query_db("SELECT year FROM vehicles WHERE vehicleId = ?", (int(v ehID),), True)
+    v =  query_db("SELECT year FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
     return v["year"]
 
 def getVehicleVin(vehID):
