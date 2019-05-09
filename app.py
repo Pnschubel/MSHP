@@ -12,11 +12,17 @@ from app import toolkit
 app = create_app()
 app.config['SECRET_KEY'] = 'superSecretGlobalKey'
 
+
+
+
 #Change the template directory for render_template
 template_dir = os.path.abspath("./app/templates")
 
+
+
+
 #Mailing
-#----------------------------------------------------------------------------------
+#--------------------------------------------------------------------------------------------
 
 #Config SMTP with App
 with app.app_context():
@@ -35,10 +41,13 @@ def sendEmail(title, html_code, target):
     msg = Message(title, sender = 'NCHS Auto Shop', recipients = [target])
     msg.html = html_code
     mail.send(msg)
+#----------------------------------------------------------------------------------------------
+
 
     
+
 #Routing
-#----------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------
 @app.route('/')
 def form():
     return render_template('login.html')
@@ -47,8 +56,13 @@ def form():
 def result():
     if request.method == 'POST':
         result = request.form.to_dict()
+#----------------------------------------------------------------------------------------------
 
-    ##the validation!:(
+
+
+
+#Validation
+#----------------------------------------------------------------------------------------------
         ok = "True"
         
         if ok == "True":
@@ -99,17 +113,32 @@ def result():
                     print ("this email is WRONG")
             
     return render_template("login.html")
+#----------------------------------------------------------------------------------------------
+
+
+
 
 #Test Mailing
+#----------------------------------------------------------------------------------------------
 @app.route("/test_sendEmail")
 def test_sendEmail():
     htmlCode = ('<p style="background-color: #ff00ff;"> ...Hello i am a pink rectangle... </p>')
     sendEmail("Test W/Parameters", render_template("EmailTemplate.html"), "spkudrna@gmail.com")
     return("...Email Sent...")
+#----------------------------------------------------------------------------------------------
 
+
+
+
+#Admin Console
+#----------------------------------------------------------------------------------------------
 @app.route("/admin")
 def adminConsole():
     render_template("console.html", getRepairIds=toolKit.getRepairIds, getAssociatedVehicle=toolKit.getAssociatedVehicle, getAssociatedCustomer=toolKit.getAssociatedCustomer, getCustomerName=toolKit.getCustomerName, getCustomerEmail=toolKit.getCustomerEmail, getCustomerPhone=toolKit.getCustomerPhone, getVehicleMake=toolKit.getVehicleMake, getVehicleModel=toolKit.getVehicleModel, getVehicleYear=toolKit.getVehicleYear, getVehicleVin=toolKit.getVehicleVin, getRepairType=toolKit.getRepairType, getRepairDescription=toolKit.getRepairDescription, getRepairAccepted=toolKit.getRepairAccepted, getRepairCompleted=toolKit.getRepairCompleted)
+#----------------------------------------------------------------------------------------------
+
+
+
 
 #This NEEDS to Stay at BOTTOM of This File. If You Move it, I Will be VERY MAD AT YOU! Be Warned...
 if __name__ == "__main__":
