@@ -134,7 +134,7 @@ def test_sendEmail():
 #----------------------------------------------------------------------------------------------
 @app.route("/admin")
 def adminConsole():
-    render_template("console.html", getRepairIds=toolKit.getRepairIds, getAssociatedVehicle=toolKit.getAssociatedVehicle, getAssociatedCustomer=toolKit.getAssociatedCustomer, getCustomerName=toolKit.getCustomerName, getCustomerEmail=toolKit.getCustomerEmail, getCustomerPhone=toolKit.getCustomerPhone, getVehicleMake=toolKit.getVehicleMake, getVehicleModel=toolKit.getVehicleModel, getVehicleYear=toolKit.getVehicleYear, getVehicleVin=toolKit.getVehicleVin, getRepairType=toolKit.getRepairType, getRepairDescription=toolKit.getRepairDescription, getRepairAccepted=toolKit.getRepairAccepted, getRepairCompleted=toolKit.getRepairCompleted)
+    return(render_template("console.html", getRepairIds=toolkit.getRepairIds, getAssociatedVehicle=toolkit.getAssociatedVehicle, getAssociatedCustomer=toolkit.getAssociatedCustomer, getCustomerName=toolkit.getCustomerName, getCustomerEmail=toolkit.getCustomerEmail, getCustomerPhone=toolkit.getCustomerPhone, getVehicleMake=toolkit.getVehicleMake, getVehicleModel=toolkit.getVehicleModel, getVehicleYear=toolkit.getVehicleYear, getVehicleVin=toolkit.getVehicleVin, getRepairType=toolkit.getRepairType, getRepairDescription=toolkit.getRepairDescription, getRepairAccepted=toolkit.getRepairAccepted, getRepairCompleted=toolkit.getRepairCompleted))
 #----------------------------------------------------------------------------------------------
 
 
