@@ -6,6 +6,7 @@ from flask import flash
 from flask_mail import Mail, Message
 from app import create_app
 from app import validation
+from app import toolKit
 
 #This NEEDS to Stay at TOP of This File. If You Move it, I Will be VERY MAD AT YOU! Be Warned...
 app = create_app()
@@ -108,7 +109,7 @@ def test_sendEmail():
 
 @app.route("/admin")
 def adminConsole():
-    render_template("console.html")
+    render_template("console.html", getRepairIds=toolKit.getRepairIds, getAssociatedVehicle=toolKit.getAssociatedVehicle, getAssociatedCustomer=toolKit.getAssociatedCustomer, getCustomerName=toolKit.getCustomerName, getCustomerEmail=toolKit.getCustomerEmail, getCustomerPhone=toolKit.getCustomerPhone, getVehicleMake=toolKit.getVehicleMake, getVehicleModel=toolKit.getVehicleModel, getVehicleYear=toolKit.getVehicleYear, getVehicleVin=toolKit.getVehicleVin, getRepairType=toolKit.getRepairType, getRepairDescription=toolKit.getRepairDescription, getRepairAccepted=toolKit.getRepairAccepted, getRepairCompleted=toolKit.getRepairCompleted)
 
 #This NEEDS to Stay at BOTTOM of This File. If You Move it, I Will be VERY MAD AT YOU! Be Warned...
 if __name__ == "__main__":
