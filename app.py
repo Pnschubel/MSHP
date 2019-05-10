@@ -122,9 +122,9 @@ def result():
 #----------------------------------------------------------------------------------------------
 @app.route("/test_sendEmail")
 def test_sendEmail():
-    htmlCode = ('<p style="background-color: #ff00ff;"> ...Hello i am a pink rectangle... </p>')
-    sendEmail("Test W/Parameters", render_template("EmailTemplate.html"), "spkudrna@gmail.com")
-    return("...Email Sent...")
+    #email template can be found at app/templates/testEmail.html
+    sendEmail("This is a test email!", render_template("testEmail.html"), "spkudrna@gmail.com")
+    return("email test succefully fired, check target inbox.")
 #----------------------------------------------------------------------------------------------
 
 
