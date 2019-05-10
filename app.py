@@ -41,9 +41,10 @@ def sendEmail(title, html_code, target):
     msg = Message(title, sender = 'NCHS Auto Shop', recipients = [target])
     msg.html = html_code
     mail.send(msg)
-#----------------------------------------------------------------------------------------------
 
-
+#Function to compile all request data into a structure readable by the custom template engine
+def compileRequestData():
+    pass
     
 
 #Routing
@@ -56,10 +57,6 @@ def form():
 def result():
     if request.method == 'POST':
         result = request.form.to_dict()
-#----------------------------------------------------------------------------------------------
-
-
-
 
 #Validation
 #----------------------------------------------------------------------------------------------
@@ -134,7 +131,7 @@ def test_sendEmail():
 #----------------------------------------------------------------------------------------------
 @app.route("/admin")
 def adminConsole():
-    return(render_template("console.html", getRepairIds=toolkit.getRepairIds, getAssociatedVehicle=toolkit.getAssociatedVehicle, getAssociatedCustomer=toolkit.getAssociatedCustomer, getCustomerName=toolkit.getCustomerName, getCustomerEmail=toolkit.getCustomerEmail, getCustomerPhone=toolkit.getCustomerPhone, getVehicleMake=toolkit.getVehicleMake, getVehicleModel=toolkit.getVehicleModel, getVehicleYear=toolkit.getVehicleYear, getVehicleVin=toolkit.getVehicleVin, getRepairType=toolkit.getRepairType, getRepairDescription=toolkit.getRepairDescription, getRepairAccepted=toolkit.getRepairAccepted, getRepairCompleted=toolkit.getRepairCompleted))
+    return(render_template("console.html", requestData=compileRequestData()))
 #----------------------------------------------------------------------------------------------
 
 
