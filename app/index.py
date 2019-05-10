@@ -23,21 +23,12 @@ def index():
         #sure that Sean's things actually work.
     #    print ("Repair Type:", entry["repairType"])
     #    print ("Repair ID:", entry["repairId"])
-
-    myIds = EZ.getRepairIds()
+    EZ.test()
+   
 
   
-    #This is me testing if the removers work -- I'm just gonna test customer.
-    vehId = EZ.getAssociatedVehicle(myIds[2])
-    cusId = EZ.getAssociatedCustomer(vehId)
 
-    EZ.RemoveCustomer(cusId)
-    #Setting repairTypes with setters.
-    # for myId in myIds:
-    #     if (myId % 2 == 0):
-    #         EZ.setRepairType(myId, "YOLO")
-    #     else:
-    #         EZ.setRepairType(myId, "SWAG")
+    
     
     #You have to grab the repairIds again because they've changed.
     myIds = EZ.getRepairIds()

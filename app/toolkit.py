@@ -180,7 +180,6 @@ def setRepairAccepted(repID, accepted):
     mySQL = concantenate("repair", "accepted", accepted)
     query_db(mySQL, (int(repID),))
     return("status has been updated to " + accepted)
-
 def setRepairCompleted(repID, completed):
     mySQL = concantenate("repair", "completed", completed)
     query_db(mySQL, (int(repID),))
@@ -301,3 +300,23 @@ def publish(formInfo):
                 formInfo['repairDescription'],
                 accepted = False,
                 completed = False)
+
+
+#TESTER FUNCTIONS
+#For testing purposes only:
+
+#This inserts dummy data into the database. I wouldn't run it more than once unless you clear the database.
+def test():
+    #Remember, must insert customer first, then vehicle, then repairs.
+    createCustomer(customerName = "Matias Bonta",
+                    customerEmail = "bontamatias@gmail.com",
+                    customerPhoneNum = "2242533717")
+
+    createVehcicle(make = "Ford",
+                    model = "Focus",
+                    year = "2011",
+                    vin = "1fahp3hn6bw178792")
+
+    createRepair(repairType = "Oil Change",
+            repairDescription = "My oil needs to be changed because I said so :-)")
+
