@@ -43,7 +43,6 @@ def getAssociatedRepairs(vehID):
 
 def getAssociatedVehicle(repID):
     vehicleId =  query_db("SELECT vehicleId  FROM repairs WHERE repairId = ?", (int(repID),), True)
-    print("TEST:", vehicleId)#Test
     return vehicleId["vehicleId"]
 
 def getAssociatedVehicles(customerID):
@@ -89,8 +88,8 @@ def getVehicleYear(vehID):
     return v["year"]
 
 def getVehicleVin(vehID):
-    v =  query_db("SELECT vin FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
-    return v["vin"]      
+    v =  query_db("SELECT vin2 FROM vehicles WHERE vehicleId = ?", (int(vehID),), True)
+    return v["vin2"]      
 
 
 #Get Repair Info
@@ -164,6 +163,11 @@ def setVehicleYear(vehID, year):
     query_db(mySQL, (int(vehID),))
     return("year has been updated to " + year)
 
+def setVehicleVin(vehID, vin2):
+    mySQL = concantentate("vehicle","vin2",vin2)
+    query_db(mySQL, (int(vehID),))
+    return ("vin has been updated to " + vin2)
+
 
 #Set Repair Info
 def setRepairType(repID, repairType):
@@ -209,7 +213,7 @@ def createVehicle(make = None,
     #If customerId isn't specified, gets the most recent one.
     if (customerId == 'default'):
         getId = query_db("SELECT customerId FROM customers ORDER BY customerId DESC", one = True)
-    query_db("INSERT INTO vehicles (make, model, year, vin, customerId) VALUES(?,?,?,?,?)", (make, model, year, vin, getId['customerId']))
+    query_db("INSERT INTO vehicles (make, model, year, vin2, customerId) VALUES(?,?,?,?,?)", (make, model, year, vin, getId['customerId']))
     return "Vehicle has been created."
 
 def createRepair(repairType,
@@ -227,29 +231,20 @@ def createRepair(repairType,
 #-----------------------------------------------------------------------------------------------------------
 
 
-#Wipe Customers
+#Wipe Everything and Clear Database
+#Helpful for troubleshooting
 def BIG_RED_BUTTON_CUSTOMERS():
-    confirmation = input("You are about to wipe all customers from user database... are you sure> (y/n)")
+    confirmation = input("You are about to wipe everything from the database... are you sure> (y/n)")
     if confirmation.lower() == "y":
-        query_db("DELETE FROM customers;")
+        myIds = getRepairIds();
+        for repId in myIds
+            vehId = getAssociatedVehicle(repId)
+            cusId = getAssociatedCustomer(vehId)
+            RemoveCustomer(cusId)
     else:
         return ("Data whipe canceled")
 
-#Wipe vehicles
-def BIG_RED_BUTTON_VEHICLES():
-    confirmation = input("You are about to wipe all vehicles from database... are you sure> (y/n)")
-    if confirmation.lower() == "y":
-        query_db("DELETE FROM vehicles;")
-    else:
-        return ("Data whipe canceled")
 
-#Wipe repairs
-def BIG_RED_BUTTON_REPAIRS():
-    confirmation = input("You are about to wipe all repairs from database... are you sure> (y/n)")
-    if confirmation.lower() == "y":
-        query_db("DELETE FROM repairs;")
-    else:
-        return ("Data whipe canceled")
 
 #Remove a row
 #-----------------------------------------------------------------------------------------------------------
@@ -312,7 +307,7 @@ def test():
                     customerEmail = "bontamatias@gmail.com",
                     customerPhoneNum = "2242533717")
 
-    createVehcicle(make = "Ford",
+    createVehicle(make = "Ford",
                     model = "Focus",
                     year = "2011",
                     vin = "1fahp3hn6bw178792")

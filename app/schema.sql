@@ -26,6 +26,7 @@ CREATE TABLE vehicles(
     model TEXT,
     year TEXT,
     vin TEXT CHECK(vin is null or length(vin) == 14),
+    vin2 TEXT,
     customerId INT NOT NULL,
     FOREIGN KEY(customerId) REFERENCES customers(customerId)
     );

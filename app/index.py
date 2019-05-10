@@ -23,21 +23,24 @@ def index():
         #sure that Sean's things actually work.
     #    print ("Repair Type:", entry["repairType"])
     #    print ("Repair ID:", entry["repairId"])
-    EZ.test()
+    #EZ.test()
    
 
   
-
-    
+        
     
     #You have to grab the repairIds again because they've changed.
     myIds = EZ.getRepairIds()
-    
+    EZ.test()
+   
+    print ("BEFORE:")
+    myIds = EZ.getRepairIds()
     #Getting repair Types with the getter. 
     for repairId in myIds:
         print (repairId)
         print("Repair ID:",repairId, "\nRepair Type:",EZ.getRepairType(repairId))
 
+    print("AFTTER:")
     return render_template("index.html")
 
 
