@@ -237,7 +237,7 @@ def BIG_RED_BUTTON_CUSTOMERS():
     confirmation = input("You are about to wipe everything from the database... are you sure> (y/n)")
     if confirmation.lower() == "y":
         myIds = getRepairIds();
-        for repId in myIds
+        for repId in myIds:
             vehId = getAssociatedVehicle(repId)
             cusId = getAssociatedCustomer(vehId)
             RemoveCustomer(cusId)
