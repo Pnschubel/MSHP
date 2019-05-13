@@ -45,7 +45,10 @@ def sendEmail(title, html_code, target):
 #Function to compile all request data into a structure readable by the custom template engine
 def compileRequestData():
     pass
-    
+#----------------------------------------------------------------------------------------------
+
+
+
 
 #Routing
 #----------------------------------------------------------------------------------------------
@@ -57,6 +60,10 @@ def form():
 def result():
     if request.method == 'POST':
         result = request.form.to_dict()
+#----------------------------------------------------------------------------------------------
+
+
+
 
 #Validation
 #----------------------------------------------------------------------------------------------
@@ -110,6 +117,31 @@ def result():
                     print ("this email is WRONG")
             
     return render_template("login.html")
+#----------------------------------------------------------------------------------------------
+
+
+
+
+#Publish
+#----------------------------------------------------------------------------------------------
+def publish(formInfo):
+
+   #Creates customer from validated form info
+   createCustomer(formInfo['customerName'], 
+                  formInfo['customerEmail'],
+                  formInfo.get('customerPhoneNum'))
+
+   #Creates vehicle form validated from info
+   createVehicle(formInfo.get('make'),
+                 formInfo.get('model'),
+                 formInfo.get('year'),
+                 formInfo.get('vin'))
+
+   #Creates repair from validated form info
+   createRepair(formInfo['repairType'],
+                formInfo['repairDescription'],
+                accepted = False,
+                completed = False)
 #----------------------------------------------------------------------------------------------
 
 
