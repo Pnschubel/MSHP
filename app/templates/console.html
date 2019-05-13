@@ -21,18 +21,18 @@
 		</header>
 
 		<section>
-			{% for repID in RepairIDs %}
-			<div class="request">
+			{% for data in compliedData %}
+			<div class="request {{data['storage']}}">
 				<div class="generics-wrapper">
-					<div class="vehicle"> {{getVehicleYear(getAssociatedVehicle(repID))}} {{getVehicleMake(getAssociatedVehicle(repID))}} {{getVehicleModel(getAssociatedVehicle(repID))}} </div>
-					<div class="vin">  {{getVehicleVIN(getAssociatedVehicle(repID))}} </div>
-					<div class="customer">  {{getCustomerName(getAssociatedCustomer(repID))}} </div>
-					<div class="information">  {{getRepairType(repID)}} : {{getRepairDescription(repID)}} </div>
+					<div class="vehicle"> {{data["year"]}} {{data["make"]}} {{data["model"]}} </div>
+					<div class="vin"> {{data["VIN"]}} </div>
+					<div class="customer"> {{data["name"]}} </div>
+					<div class="information"> {{data["type"]}} : {{data["description"]}} </div>
 				</div>
 				
 				<div class="button-wrapper">
-					<button class="multi-button {{'accept' if getRepairAccepted(repID) == False and getRepairCompleted(repID) == False}}{{'print' if getRepairAccepted(repID) == True and getRepairCompleted(repID) == False}}"></button>
-					<button class="multi-button {{'deny' if getRepairAccepted(repID) == False and getRepairCompleted(repID) == False}}{{'complete' if getRepairAccepted(repID) == True and getRepairCompleted(repID) == False}}"></button>
+					<button class="multi-button {{data['derivedStateRight']}}"></button>
+					<button class="multi-button {{data['derivedStateRight']}}"></button>
 				</div>
 			</div>
 			{% endfor %}

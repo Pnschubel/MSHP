@@ -119,34 +119,6 @@ def result():
     return render_template("login.html")
 #----------------------------------------------------------------------------------------------
 
-
-
-
-#Publish
-#----------------------------------------------------------------------------------------------
-def publish(formInfo):
-
-   #Creates customer from validated form info
-   createCustomer(formInfo['customerName'], 
-                  formInfo['customerEmail'],
-                  formInfo.get('customerPhoneNum'))
-
-   #Creates vehicle form validated from info
-   createVehicle(formInfo.get('make'),
-                 formInfo.get('model'),
-                 formInfo.get('year'),
-                 formInfo.get('vin'))
-
-   #Creates repair from validated form info
-   createRepair(formInfo['repairType'],
-                formInfo['repairDescription'],
-                accepted = False,
-                completed = False)
-#----------------------------------------------------------------------------------------------
-
-
-
-
 #Test Mailing
 #----------------------------------------------------------------------------------------------
 @app.route("/test_sendEmail")
@@ -163,7 +135,7 @@ def test_sendEmail():
 #----------------------------------------------------------------------------------------------
 @app.route("/admin")
 def adminConsole():
-    return(render_template("console.html", requestData=compileRequestData()))
+    return(render_template("console.html", compliedData=compileRequestData()))
 #----------------------------------------------------------------------------------------------
 
 

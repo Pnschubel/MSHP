@@ -242,7 +242,7 @@ def BIG_RED_BUTTON_CUSTOMERS():
             cusId = getAssociatedCustomer(vehId)
             RemoveCustomer(cusId)
     else:
-        return ("Data whipe canceled")
+        return ("Data whipe canceled") #Sean is great at spelling.
 
 
 
@@ -273,9 +273,6 @@ def RemoveCustomer(cusID):
     query_db("DELETE FROM customers WHERE customerId = ?", (int(cusID),))
     return "Customer has been deleted"
 
-
-
-
 #PUBLISH FORM DATA TO THE DATABASE
 def publish(formInfo):
 
@@ -295,7 +292,6 @@ def publish(formInfo):
                 formInfo['repairDescription'],
                 accepted = False,
                 completed = False)
-
 
 #TESTER FUNCTIONS
 #For testing purposes only:
