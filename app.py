@@ -115,7 +115,8 @@ def result():
             if validation.emailChecker(result['customerEmail']) == "False":
                     flash("Email is invalid")
                     print ("this email is WRONG")
-            
+    if ok == "True"
+        publish(result)
     return render_template("login.html")
 #----------------------------------------------------------------------------------------------
 
