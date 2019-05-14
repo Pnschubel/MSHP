@@ -132,6 +132,14 @@ def test_sendEmail():
 @app.route("/admin")
 def adminConsole():
     return(render_template("console.html", compliedData=toolkit.compileRequestData()))
+
+@app.route("/admin/sinistra/<repairID>")
+def sinistra(repairID):
+    pass
+
+@app.route("admin/destra/<repairID>")
+def destra(repairID):
+    pass
 #----------------------------------------------------------------------------------------------
 
 #Route to purge the database... smart idea
