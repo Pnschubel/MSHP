@@ -23,7 +23,7 @@ import array
 #Get ALL RepairIds
 def getRepairIds():
     #array for all the repairIds
-    myIds = array.array('i')
+    myIds = []
     #Returns a list of dictionaries of all repairIds with key repairId
     repairIds = query_db("""SELECT repairId FROM repairs""")
     
@@ -310,4 +310,50 @@ def test():
 
     createRepair(repairType = "Oil Change",
             repairDescription = "My oil needs to be changed because I said so :-)")
+
+#Method to compile all request data into a format readable by the
+#custom templating engine for the admin console page. Organizes each individual
+#request as a dictionary containing pertinent information and some utility variables
+#(mostly derived from the "accepted" and "completed" states of a repair). Packages all
+#request-dictionaries into an indexable list for the templating engine.
+def compileRequestData():
+    #Create list to be filled with dictionaries.
+    compiledData = []
+    #Derive utility states for left multi-button, right multi-button, and overall display state.
+    for repairID in getRepairIds():
+        if getRepairAccepted(repairID) == True:
+            if getRepairCompleted(repairID) == True:
+                U_DLS = "excluded"
+                U_DRS = "excluded"
+                U_DDS = False
+            if getRepairCompleted(repairID) == False:
+                U_DLS = "print"
+                U_DRS = "complete"
+                U_DDS = True
+        if getRepairAccepted(repairID) == False:
+            if getRepairCompleted(repairID) == True:
+                U_DLS = "excluded"
+                U_DRS = "excluded"
+                U_DDS = False
+            if getRepairCompleted(repairID) == False:
+                U_DLS = "accept"
+                U_DRS = "deny"
+                U_DDS = True
+        #Package request data and derived utility states into a dictionary.
+        requestData = {
+            "year" : getVehicleYear(getAssociatedVehicle(repairID)),
+            "make" : getVehicleMake(getAssociatedVehicle(repairID)),
+            "model" : getVehicleModel(getAssociatedVehicle(repairID)),
+            "VIN" : getVehicleVIN(getAssociatedVehicle(repairID)),
+            "name" : getCustomerName(getAssociatedCustomer(getAssociatedVehicle(repairID))),
+            "type" : getRepairType(repairID),
+            "description" : getRepairDescription(repairID),
+            "utilityDerivedLeftState" : U_DLS,
+            "utilityDerivedRightState" : U_DRS,
+            "utilityDerivedDisplayState" : U_DDS,
+            "utilityIdentifier" : repairID
+        }
+        #Push dictionary to list of dictionaries.
+        compiledData.append(requestData)
+    return compiledData
 
