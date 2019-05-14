@@ -21,20 +21,22 @@
 		</header>
 
 		<section>
-			{% for data in compliedData %}
-			<div class="request {{data['storage']}}">
+			{% for requestData in compliedData %}
+			{% if requestData['utilityDerivedDisplayState'] == True %}
+			<div class="request {{requestData['utilityIdentifier']}}">
 				<div class="generics-wrapper">
-					<div class="vehicle"> {{data["year"]}} {{data["make"]}} {{data["model"]}} </div>
-					<div class="vin"> {{data["VIN"]}} </div>
-					<div class="customer"> {{data["name"]}} </div>
-					<div class="information"> {{data["type"]}} : {{data["description"]}} </div>
+					<div class="vehicle"> {{requestData['year']}} {{requestData['make']}} {{requestData['model']}} </div>
+					<div class="vin"> {{requestData['VIN']}} </div>
+					<div class="customer"> {{requestData['name']}} </div>
+					<div class="information"> {{requestData['type']}} : {{requestData['description']}} </div>
 				</div>
 				
 				<div class="button-wrapper">
-					<button class="multi-button {{data['derivedStateLeft']}}"></button>
-					<button class="multi-button {{data['derivedStateRight']}}"></button>
+					<button class="multi-button {{requestData['utilityDerivedLeftState']}}"></button>
+					<button class="multi-button {{requestData['utilityDerivedRightState']}}"></button>
 				</div>
 			</div>
+			{% endif %}
 			{% endfor %}
 
 		</section>
