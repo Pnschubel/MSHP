@@ -109,7 +109,7 @@ def result():
                     print ("this email is WRONG")
 
             if ok == "True":
-                publish(result)
+                toolkit.publish(result)
                 render_template("success.html")
             
     return render_template("login.html")
