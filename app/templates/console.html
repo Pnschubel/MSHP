@@ -6,33 +6,29 @@
 
 		<link href="https://fonts.googleapis.com/css?family=Nunito+Sans:900" rel="stylesheet">
 
-
-
 		<link rel="stylesheet" href="static/stylesheet.css">
-
-		<script type="text/javascript" src="hell.js"></script>
 
 		<title>NCHS Auto Shop</title>
 
 	</head>
 
-	<body onload="handleClicks()">
+	<body>
 		<header>
 		</header>
 
 		<section>
 			{% for requestData in compliedData %}
 			{% if requestData['utilityDerivedDisplayState'] == True %}
-			<div class="request {{requestData['utilityIdentifier']}}">
+			<div class="request">
 				<div class="generics-wrapper">
-					<div class="vehicle"> {{requestData['year']}} {{requestData['make']}} {{requestData['model']}} </div>
-					<div class="vin"> {{requestData['VIN']}} </div>
-					<div class="customer"> {{requestData['name']}} </div>
-					<div class="information"> {{requestData['type']}} : {{requestData['description']}} </div>
+					<div class="vehicle">{{requestData['year']}} {{requestData['make']}} {{requestData['model']}} </div>
+					<div class="vin">{{requestData['VIN']}} {{'No VIN Provided' if requestData['VIN'] == ''}}</div>
+					<div class="customer">{{requestData['name']}}</div>
+					<div class="information">{{requestData['type']}} : {{requestData['description']}}</div>
 				</div>
 				
 				<div class="button-wrapper">
-					<button class="multi-button"></button>
+					<button class="multi-button {{requestData['utilityDerivedLeftState']}}"></button>
 					<button class="multi-button {{requestData['utilityDerivedRightState']}}"></button>
 				</div>
 			</div>

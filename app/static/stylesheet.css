@@ -35,7 +35,7 @@ header {
   width: 500px;
   font-size: 40px;
   color: #F7FFF7;
-  background: transparent;(
+  background: transparent;
   font-family: 'Nunito Sans', sans-serif;
 }
 
@@ -65,15 +65,6 @@ header {
   position: absolute;
   right: 0;
   margin-right: 12px;
-  background: transparent;
-}
-
-.info-wrapper {
-  top: 50%;
-  transform: translateY(-50%);
-  position: absolute;
-  left: 500px;
-  margin-right: 0px;
   background: transparent;
 }
 
