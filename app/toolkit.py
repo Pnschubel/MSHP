@@ -233,16 +233,14 @@ def createRepair(repairType,
 
 #Wipe Everything and Clear Database
 #Helpful for troubleshooting
-def BIG_RED_BUTTON_CUSTOMERS():
-    confirmation = input("You are about to wipe everything from the database... are you sure> (y/n)")
-    if confirmation.lower() == "y":
-        myIds = getRepairIds();
-        for repId in myIds:
-            vehId = getAssociatedVehicle(repId)
-            cusId = getAssociatedCustomer(vehId)
-            RemoveCustomer(cusId)
-    else:
-        return ("Data whipe canceled") #Sean is great at spelling.
+def BIG_RED_BUTTON():
+    myIds = getRepairIds();
+    for repId in myIds:
+        vehId = getAssociatedVehicle(repId)
+        cusId = getAssociatedCustomer(vehId)
+        RemoveCustomer(cusId)
+
+    return ("Data whipe completed") #Sean is great at spelling.
 
 
 
@@ -321,6 +319,9 @@ def compileRequestData():
     compiledData = []
     #Derive utility states for left multi-button, right multi-button, and overall display state.
     for repairID in getRepairIds():
+        U_DLS = "excluded"
+        U_DRS = "excluded"
+        U_DDS = True
         if getRepairAccepted(repairID) == True:
             if getRepairCompleted(repairID) == True:
                 U_DLS = "excluded"
@@ -344,7 +345,7 @@ def compileRequestData():
             "year" : getVehicleYear(getAssociatedVehicle(repairID)),
             "make" : getVehicleMake(getAssociatedVehicle(repairID)),
             "model" : getVehicleModel(getAssociatedVehicle(repairID)),
-            "VIN" : getVehicleVIN(getAssociatedVehicle(repairID)),
+            "VIN" : getVehicleVin(getAssociatedVehicle(repairID)),
             "name" : getCustomerName(getAssociatedCustomer(getAssociatedVehicle(repairID))),
             "type" : getRepairType(repairID),
             "description" : getRepairDescription(repairID),

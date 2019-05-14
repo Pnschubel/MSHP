@@ -107,6 +107,10 @@ def result():
             if validation.emailChecker(result['customerEmail']) == "False":
                     flash("Email is invalid")
                     print ("this email is WRONG")
+
+            if ok == "True":
+                publish(result)
+                render_template("success.html")
             
     return render_template("login.html")
 #----------------------------------------------------------------------------------------------
@@ -127,10 +131,14 @@ def test_sendEmail():
 #----------------------------------------------------------------------------------------------
 @app.route("/admin")
 def adminConsole():
-    return(render_template("console.html", compliedData=compileRequestData()))
+    return(render_template("console.html", compliedData=toolkit.compileRequestData()))
 #----------------------------------------------------------------------------------------------
 
-
+#Route to purge the database... smart idea
+@app.route("/this/is/a/bad/idea")
+def seanThinksThisIsInsaneAndHeIsCorrect():
+    toolkit.BIG_RED_BUTTON()
+    return("bye bye...")
 
 
 #This NEEDS to Stay at BOTTOM of This File. If You Move it, I Will be VERY MAD AT YOU! Be Warned...
