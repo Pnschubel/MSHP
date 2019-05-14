@@ -42,14 +42,6 @@ def sendEmail(title, html_code, target):
     msg.html = html_code
     mail.send(msg)
 
-#Function to compile all request data into a structure readable by the custom template engine
-def compileRequestData():
-    pass
-#----------------------------------------------------------------------------------------------
-
-
-
-
 #Routing
 #----------------------------------------------------------------------------------------------
 @app.route('/')
