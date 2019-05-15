@@ -10,7 +10,7 @@ app.py
 
 
 	Forms
-		Using functions in validation.py, validate information given by the user
+		Using functions in validation.py, validate information given by the user by the rendered html form login.html
 	Admin Counsel
 
 
@@ -38,8 +38,10 @@ Static (folder)
 	stylesheet.css
 templates (folder)
 	console.html
-	errorPage.html
+	success.html
+		a success message, will be rendered in app when form is entered correctly
 	login.html
+		the html form where user will enter in information, rendered in app.py
 	result.html
 	testEmail.html
 
