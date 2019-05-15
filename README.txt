@@ -17,20 +17,20 @@ app.py
 EmailTemplates.txt
 instance (folder)
 	CarDB.sqlite
-		This is the location in which the data is actually stored, and you will never really interact with this file directly beyond its creation -- you’ll be using query_db() instead
+		This is the location in which the data is actually stored, and you will never really interact with this file directly beyond its creation -- youâ€™ll be using query_db() instead
 	config.py
-		We’re not entirely sure what this file does, but it seemed important so we left it there to avoid errors.
+		Weâ€™re not entirely sure what this file does, but it seemed important so we left it there to avoid errors.
 app (folder)
 	database.py
 		This is the file in which the python methods exist that you can use to interact with the database. The imports are sqlite3, click, os, from flask import current_app, g, from flask.cli import with_appcontext. The methods are get_db(), query_db(query, args=(), one=False), close_db(exception=None), init_db(), init_app(myApp), inidb_command()
 	index.py
-		This is the file that was used to test the code, specifically the database code. You can write testing methods with special Flask code, but it’s kind of a pain in the butt, so it’s just easier to create a route and call that to test  your stuff. 
+		This is the file that was used to test the code, specifically the database code. You can write testing methods with special Flask code, but itâ€™s kind of a pain in the butt, so itâ€™s just easier to create a route and call that to test  your stuff. 
 	__init__.py
-		This has your create_app(test_config=None) function, which is really important in regards to getting the app context in the rest of your files. Be sure to include it. It’s also where you import/register blueprints.
+		This has your create_app(test_config=None) function, which is really important in regards to getting the app context in the rest of your files. Be sure to include it. Itâ€™s also where you import/register blueprints.
 	schema.sql
 		The code that is essentially the framework for your database into which you will later insert actual data. You create CarDB.db from the schema, which has all of your tables and columns contained within. 
 	toolkit.py
-		Gets, sets, adds, removes, and creates data in the database using query_db() but simplified for ease of use by those who don’t understand how query_db() works
+		Gets, sets, adds, removes, and creates data in the database using query_db() but simplified for ease of use by those who donâ€™t understand how query_db() works
 	validation.py
 		All your stuff from flask 
 Static (folder)
@@ -57,14 +57,14 @@ SEQUENTIAL INSTALLATION INSTRUCTIONS:
 		None
 
 INSTALL FROM GITHUB:
-	Ask Mr. Hayes for the github repo url -- he should have been made owner. If not, it’s called MSHP. Good luck finding that (it stands for Magical Sparkly Handheld Polyhedrons, but that was too long.)
+	Ask Mr. Hayes for the github repo url -- he should have been made owner. If not, itâ€™s called MSHP. Good luck finding that (it stands for Magical Sparkly Handheld Polyhedrons, but that was too long.)
 
 
 USING PROJECT:
 	How to Configure Project:
 		Project should be pre-configured on the server.
 	How to Run Project:
-		From the customer end…
+		From the customer endâ€¦
 			Launch the url: {{INSERT URL HERE}}
-		From the administration end…
+		From the administration endâ€¦
 			Launch the url: {{INSERT URL HERE}}
