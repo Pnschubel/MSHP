@@ -42,7 +42,6 @@ templates (folder)
 		a success message, will be rendered in app when form is entered correctly
 	login.html
 		the html form where user will enter in information, rendered in app.py
-	result.html
 	testEmail.html
 
 
