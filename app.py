@@ -136,13 +136,14 @@ def adminConsole():
 @app.route("/admin/L/<repairID>")
 def sinistra(repairID):
     if getRepairAccepted(repairID) == True:
+        pass
         #printForm(repairID)
     else:
         setRepairAccepted(repairID, True)
         #sendAcceptEmail()
     return(render_template("console.html", compliedData=toolkit.compileRequestData()))
 
-@app.route("admin/R/<repairID>")
+@app.route("/admin/R/<repairID>")
 def destra(repairID):
     if getRepairAccepted(repairID) == True:
         setRepairCompleted(repairID, True)
