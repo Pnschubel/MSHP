@@ -28,8 +28,12 @@
 				</div>
 				
 				<div class="button-wrapper">
-					<button class="multi-button {{requestData['utilityDerivedLeftState']}}"></button>
-					<button class="multi-button {{requestData['utilityDerivedRightState']}}"></button>
+					<form action="/sinistra/{{requestData['utilityIdentifier']}}" method="post">
+						<button class="multi-button {{requestData['utilityDerivedLeftState']}}" type="submit"></button>
+					</form>
+					<form action="/destra/{{requestData['utilityIdentifier']}}" method="post">
+						<button class="multi-button {{requestData['utilityDerivedRightState']}}" type="submit"></button>
+					</form>
 				</div>
 			</div>
 			{% endif %}
