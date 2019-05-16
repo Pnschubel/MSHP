@@ -153,12 +153,15 @@ def destra(repairID):
 #----------------------------------------------------------------------------------------------
 
 #Route to purge the database... smart idea
-@app.route("/this/is/a/bad/idea")
-def seanThinksThisIsInsaneAndHeIsCorrect():
-    toolkit.BIG_RED_BUTTON()
-    return("bye bye...")
+@app.route("/purge/database/<secretKey>")
+def seanThinksThisIsInsaneAndHeIsCorrect(secretKey):
+    if secretKey == app.config['SECRET_KEY']:
+        toolkit.BIG_RED_BUTTON()
+        return("bye bye...")
+    else:
+        return("nope.")
 
 
 #This NEEDS to Stay at BOTTOM of This File. If You Move it, I Will be VERY MAD AT YOU! Be Warned...
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True) #this should probably be False in a productoin environent...
