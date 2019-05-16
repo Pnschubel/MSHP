@@ -133,7 +133,7 @@ def test_sendEmail():
 def adminConsole():
     return(render_template("console.html", compliedData=toolkit.compileRequestData()))
 
-@app.route("/admin/sinistra/<repairID>")
+@app.route("/admin/L/<repairID>")
 def sinistra(repairID):
     if getRepairAccepted(repairID) == True:
         #printForm(repairID)
@@ -142,7 +142,7 @@ def sinistra(repairID):
         #sendAcceptEmail()
     return(render_template("console.html", compliedData=toolkit.compileRequestData()))
 
-@app.route("admin/destra/<repairID>")
+@app.route("admin/R/<repairID>")
 def destra(repairID):
     if getRepairAccepted(repairID) == True:
         setRepairCompleted(repairID, True)
