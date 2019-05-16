@@ -135,11 +135,19 @@ def adminConsole():
 
 @app.route("/admin/sinistra/<repairID>")
 def sinistra(repairID):
-    pass
+    if getRepairAccepted(repairID) == True:
+        #printForm(repairID)
+    else:
+        setRepairAccepted(repairID, True)
+        #sendAcceptEmail()
 
 @app.route("admin/destra/<repairID>")
 def destra(repairID):
-    pass
+    if getRepairAccepted(repairID) == True:
+        setRepairCompleted(repairID, True)
+    else:
+        setRepairCompleted(repairID, True)
+        #sendRejectEmail()
 #----------------------------------------------------------------------------------------------
 
 #Route to purge the database... smart idea
