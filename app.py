@@ -133,6 +133,13 @@ def test_sendEmail():
 def adminConsole():
     return(render_template("console.html", compliedData=toolkit.compileRequestData()))
 
+@app.route("/admin", methods=['POST'])
+def processAdminRequest():
+    if request.form['side'] == 'L':
+        pass
+    if request.form['side'] == 'R':
+        pass
+
 @app.route("/admin/L/<repairID>")
 def sinistra(repairID):
     if getRepairAccepted(repairID) == True:

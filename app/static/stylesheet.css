@@ -19,6 +19,10 @@ header {
   height: 0;
 }
 
+form {
+  background: none;
+}
+
 .request {
   position: relative;
   height: 150px;
