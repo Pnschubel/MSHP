@@ -140,6 +140,7 @@ def sinistra(repairID):
     else:
         setRepairAccepted(repairID, True)
         #sendAcceptEmail()
+    return(render_template("console.html", compliedData=toolkit.compileRequestData()))
 
 @app.route("admin/destra/<repairID>")
 def destra(repairID):
@@ -148,6 +149,7 @@ def destra(repairID):
     else:
         setRepairCompleted(repairID, True)
         #sendRejectEmail()
+    return(render_template("console.html", compliedData=toolkit.compileRequestData()))
 #----------------------------------------------------------------------------------------------
 
 #Route to purge the database... smart idea
