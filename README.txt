@@ -73,3 +73,18 @@ USING PROJECT:
 		From the administration end…
 			Launch the url: {{INSERT URL HERE}}
 		(Note: We won't know the final urls until the site gets hosted, which hasn't currently happened yet. Stay tuned.)
+		
+		
+CHANGES FOR THE FUTURE:
+- Button functionality (there is some backend for these things):
+	- Pressing Deny/Accept should prompt Mr. Feid to send an email (which he should be allowed to send as default or modify)
+	- Pressing Deny/Accept should update the deny/accept boolean in the database.
+	- Pressing Deny and sending the email should remove the particular request from the admin console
+	- Pressing Accept and sending the email should switch the button to completed and offer Mr. Feid a way to print the manual form he needs to print.
+- PDF Form Functionality (theere is some backend for these things.)
+	- Mr. Feid should be able to print the form (that one he needs in triplicate) or download the form.
+- Additional Things (There is currently no backend created for these things):
+	- Security Implementations: 
+		- Login to the admin console should exist.
+		- Security features should be investigated and implemented.
+	
