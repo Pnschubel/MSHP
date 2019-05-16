@@ -7,11 +7,11 @@ app.py
 	Mailing
 		Establishes connection with google's mailing server to allow for automated emailing from the website to customers about requests.
 	Routing
-
-
+		How to naviate between pages on the website.
 	Forms
 		Using functions in validation.py, validate information given by the user by the rendered html form login.html
-	Admin Counsel
+	Admin Console
+		Where the administrator is going to be able to view the data.
 
 
 EmailTemplates.txt
@@ -36,13 +36,16 @@ app (folder)
 Static (folder)
 	hell.js
 	stylesheet.css
+		Styling file to create prettier imagery.
 templates (folder)
 	console.html
+		The html file that generates the buttons for the admin window to view the data
 	success.html
 		a success message, will be rendered in app when form is entered correctly
 	login.html
 		the html form where user will enter in information, rendered in app.py
 	testEmail.html
+		Test email to demonstrate the functionality of the emailing functions.
 
 
 
@@ -69,3 +72,4 @@ USING PROJECT:
 			Launch the url: {{INSERT URL HERE}}
 		From the administration end…
 			Launch the url: {{INSERT URL HERE}}
+		(Note: We won't know the final urls until the site gets hosted, which hasn't currently happened yet. Stay tuned.)
