@@ -34,7 +34,6 @@ app (folder)
 	validation.py
 		All your stuff from flask 
 Static (folder)
-	hell.js
 	stylesheet.css
 		Styling file to create prettier imagery.
 templates (folder)
