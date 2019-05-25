@@ -51,12 +51,12 @@ templates (folder)
 
 
 PLATFORM REQUIREMENTS:
-None known
+	None known
 
 
 SEQUENTIAL INSTALLATION INSTRUCTIONS:
 	General Dependencies (Install First)
-		Flask
+		python 3 (or greater), Flask, flaskMail, pdfkit (if implementing PDF functionality)
 	Dependencies for Database:
 		None
 
